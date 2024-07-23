@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../utils/constants.dart';
+import 'favBtn.dart';
 
 class FeaturedDealDuplicate extends StatefulWidget {
   final String imagePath;
@@ -24,6 +24,12 @@ class FeaturedDealDuplicate extends StatefulWidget {
 
 class _FeaturedDealDuplicateState extends State<FeaturedDealDuplicate> {
   bool isFavorite = false;
+
+  void _onFavoriteChanged(bool newValue) {
+    setState(() {
+      isFavorite = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,17 +81,11 @@ class _FeaturedDealDuplicateState extends State<FeaturedDealDuplicate> {
               Positioned(
                 top: 15,
                 right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                  child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                    size: 16,
-                  ),
+                child: FavoriteButton(
+                  isFavorite: isFavorite,
+                  iconColor: Colors.red,
+                  iconDisabledColor: Colors.grey[400],
+                  valueChanged: _onFavoriteChanged,
                 ),
               ),
             ],

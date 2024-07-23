@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/screens/CartScreen.dart';
 import 'package:redpro_mart/screens/CheckoutScreen.dart';
-
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../utils/constants.dart';
-
 import 'HomeScreen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -26,8 +23,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   ];
   int _currentPage = 0;
   final PageController _pageController = PageController();
-
   int _selectedIndex = 0;
+  List<bool> selectedSizes = List<bool>.filled(6, false);
+  List<bool> selectedGrades = List<bool>.filled(4, false);
+  int quantity = 1;
 
   @override
   void initState() {
@@ -48,13 +47,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     super.dispose();
   }
 
-
-  List<bool> selectedSizes = List<bool>.filled(6, false);
-  List<bool> selectedGrades = List<bool>.filled(4, false);
-  int quantity = 1;
-
-
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -62,25 +54,59 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white,
-
-
-
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},   style: TextButton.styleFrom(
-          overlayColor: Colors.transparent,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 30,
+          ),
         ),
+        title: Center(
+          child: Text(
+            'Product Detail',
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
         ),
         actions: [
           IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
+            icon: Container(
+              padding: EdgeInsets.all(8.0), // Adjust padding as needed
+              decoration: BoxDecoration(
+                color: Colors.white, // Background color of the circle
+                shape: BoxShape.circle, // Circle shape
+                border: Border.all(
+                  color: Constants.mainAppColor, // Border color
+                  width: 2.0, // Border width
+                ),
+              ),
+              child: Icon(
+                Icons.more_vert_rounded,
+                color: Constants.mainAppColor, // Icon color
+              ),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },
+            style: TextButton.styleFrom(
+              overlayColor: Colors.transparent,
+            ),
           ),
-          ),
+
+
         ],
       ),
       body: SingleChildScrollView(
@@ -88,32 +114,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
-                  },
-                  child: Image.asset(
-                    'assets/backButton.png', // Replace with your back button image path
-                    height: 30,
-                    width: 30,
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'Product Detail',
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
             Center(
               child: Column(
                 children: [
@@ -126,12 +126,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       itemBuilder: (context, index) {
                         return Image.asset(
                           imagePaths[index],
-                          fit: BoxFit.contain, // Changed from BoxFit.contain to BoxFit.cover
+                          fit: BoxFit.cover,
                         );
                       },
                     ),
                   ),
-
                   const SizedBox(height: 8.0),
                   SmoothPageIndicator(
                     controller: _pageController,
@@ -284,7 +283,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
               ],
             ),
-
+            const SizedBox(height: 15.0),
             Row(
               children: [
                 Expanded(
@@ -292,9 +291,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     icon: const Icon(Icons.shopping_bag_outlined),
                     label: const Text('Add to cart'),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CartScreen()));
+                      // Handle add to cart functionality
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.deepOrange,
@@ -333,8 +330,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ],
         ),
       ),
-
-
     );
   }
 
@@ -348,6 +343,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
+
   Widget _buildChips(List<String> labels, List<bool> selected) {
     return Wrap(
       spacing: 8.0,
@@ -359,7 +355,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           selected: selected[index],
           onSelected: (bool selectedValue) {
             setState(() {
-              selected[index] = selectedValue;
+              // Ensure only one variation (size or grade) can be selected at a time
+              for (int i = 0; i < selected.length; i++) {
+                selected[i] = i == index ? selectedValue : false;
+              }
             });
           },
           shape: RoundedRectangleBorder(
@@ -370,7 +369,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           backgroundColor: Colors.white,
           selectedColor: Colors.white,
-
           checkmarkColor: Colors.red[900],
           labelStyle: TextStyle(
             color: selected[index] ? Colors.deepOrange : Colors.grey,

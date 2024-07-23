@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'favBtn.dart';
 
 class ProductCardDuplicate extends StatefulWidget {
   final String imagePath;
@@ -22,6 +23,12 @@ class ProductCardDuplicate extends StatefulWidget {
 
 class _ProductCardDuplicateState extends State<ProductCardDuplicate> {
   bool isFavorite = false;
+
+  void _onFavoriteChanged(bool newValue) {
+    setState(() {
+      isFavorite = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +62,11 @@ class _ProductCardDuplicateState extends State<ProductCardDuplicate> {
               Positioned(
                 top: 10,
                 right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                  child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                    size: 16,
-                  ),
+                child: FavoriteButton(
+                  isFavorite: isFavorite,
+                  iconColor: Colors.red,
+                  iconDisabledColor: Colors.grey[400],
+                  valueChanged: _onFavoriteChanged,
                 ),
               ),
             ],
@@ -82,18 +83,16 @@ class _ProductCardDuplicateState extends State<ProductCardDuplicate> {
                     children: [
                       Text(
                         widget.title,
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                       Text(
                         widget.subtitle,
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 10,
                           color: Colors.grey,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                       Row(

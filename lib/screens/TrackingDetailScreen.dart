@@ -18,13 +18,25 @@ class TrackingDetailScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: AppBar(title:  Text(
+        "Tracking Detail",
+        style: GoogleFonts.poppins(fontSize: screenWidth * 0.06),
+      ),centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CheckoutScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png',
+            height: screenHeight * 0.03,
+            width: screenWidth * 0.09,
+          ),
         ),
         actions: [
           IconButton(
@@ -37,39 +49,7 @@ class TrackingDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(screenWidth * 0.02),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CheckoutScreen()),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/backButton.png',
-                          height: screenHeight * 0.03,
-                          width: screenWidth * 0.09,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Tracking Detail",
-                      style: GoogleFonts.poppins(fontSize: screenWidth * 0.06),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+
             Padding(
               padding: EdgeInsets.all(screenWidth * 0.05),
               child: Column(

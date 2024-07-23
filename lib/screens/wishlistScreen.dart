@@ -52,14 +52,26 @@ class _WishlistScreenState extends State<WishlistScreen> {
     List<String> choices = ["All", "Fruits", "Vegetables", "Deals", "New"];
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(title: Text('Wishlist',style: GoogleFonts.poppins(
+        fontSize: 24,)),
+        centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-      leading: IconButton(
-          icon: Icon(Icons.menu),
-      onPressed: () {},
-    ),
+      leading:  GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen()),
+          );
+        },
+        child: Image.asset(
+          'assets/backButton.png', // Replace with your back button image path
+          height: 30,
+          width: 30,
+        ),
+      ),
         actions: [
           IconButton(
             icon: Icon(CupertinoIcons.bag),
@@ -78,39 +90,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Stack(
-                  children: [
-                    Center(
-                      child: Text(
-                        'Wishlist',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 0,
-                      child: Container(
-                        width: 40, // Set the width for the back button container
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
-                            );
-                          },
-                          child: Image.asset(
-                            'assets/backButton.png', // Replace with your back button image path
-                            height: 30,
-                            width: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(height: 20),
                 Row(
                   children: <Widget>[

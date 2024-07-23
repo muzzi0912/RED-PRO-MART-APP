@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SearchScreen()),
+                MaterialPageRoute(builder: (context) => CartScreen()),
               );
             },   style: TextButton.styleFrom(
             overlayColor: Colors.transparent,
@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.asset(
-                                      'assets/arrow-right-line.png',
+                                      'assets/arrow-right.png',
                                       color: Colors.white,
                                       width: 24,
                                       height: 24,

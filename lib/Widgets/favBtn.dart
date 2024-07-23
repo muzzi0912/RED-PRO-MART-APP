@@ -9,7 +9,7 @@ class FavoriteButton extends StatefulWidget {
     bool? isFavorite,
     required Function valueChanged,
     Key? key,
-  })  : _iconSize = iconSize ?? 60.0,
+  })  : _iconSize = iconSize ?? 30.0, // Updated default icon size
         _iconColor = iconColor ?? Colors.red,
         _iconDisabledColor = iconDisabledColor ?? Colors.grey[400],
         _isFavorite = isFavorite ?? false,
@@ -49,8 +49,8 @@ class _FavoriteButtonState extends State<FavoriteButton>
     _isFavorite = widget._isFavorite;
     _maxIconSize = (widget._iconSize < 20.0)
         ? 20.0
-        : (widget._iconSize > 100.0)
-        ? 100.0
+        : (widget._iconSize > 60.0) // Adjusted maximum size to a smaller value
+        ? 60.0
         : widget._iconSize;
     final double _sizeDifference = _maxIconSize * 0.30;
     _minIconSize = _maxIconSize - _sizeDifference;
@@ -128,7 +128,7 @@ class _FavoriteButtonState extends State<FavoriteButton>
             });
           },
           child: Icon(
-            (Icons.favorite),
+            _isFavorite ? Icons.favorite : Icons.favorite_outline,
             color: _colorAnimation.value,
             size: _sizeAnimation.value,
           ),

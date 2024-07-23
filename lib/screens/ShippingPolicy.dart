@@ -42,15 +42,23 @@ class _ShippingPolicyState extends State<ShippingPolicy> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(title: Text('Shipping Policy',style: GoogleFonts.poppins(
+        fontSize: 24,)),
+        centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
+        leading:  GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 40,
           ),
         ),
         actions: [

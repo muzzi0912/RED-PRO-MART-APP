@@ -47,7 +47,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 title: Text(
   'My Orders',
 
-  style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 20),
+  style: GoogleFonts.poppins(fontSize: 24),
 ),centerTitle: true,
           surfaceTintColor: Colors.white,
           scrolledUnderElevation: 0.0,

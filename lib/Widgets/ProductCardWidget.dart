@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'favBtn.dart';
 
 class ProductCard extends StatefulWidget {
   final String imagePath;
@@ -22,6 +23,12 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   bool isFavorite = false;
+
+  void _onFavoriteChanged(bool newValue) {
+    setState(() {
+      isFavorite = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +62,13 @@ class _ProductCardState extends State<ProductCard> {
               Positioned(
                 top: 15,
                 right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                  child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                  ),
+                child: FavoriteButton(
+
+                  isFavorite: isFavorite,
+                  iconColor: Colors.red,
+                  iconDisabledColor: Colors.grey[400],
+                  valueChanged: _onFavoriteChanged,
+
                 ),
               ),
             ],

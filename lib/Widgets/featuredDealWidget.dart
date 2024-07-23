@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../utils/constants.dart';
+import 'favBtn.dart';
 
 class Featureddealwidget extends StatefulWidget {
   final String imagePath;
@@ -23,6 +24,12 @@ class Featureddealwidget extends StatefulWidget {
 
 class _FeatureddealwidgetState extends State<Featureddealwidget> {
   bool isFavorite = false;
+
+  void _onFavoriteChanged(bool newValue) {
+    setState(() {
+      isFavorite = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +81,11 @@ class _FeatureddealwidgetState extends State<Featureddealwidget> {
               Positioned(
                 top: 15,
                 right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                  child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                  ),
+                child: FavoriteButton(
+                  isFavorite: isFavorite,
+                  iconColor: Colors.red,
+                  iconDisabledColor: Colors.grey[400],
+                  valueChanged: _onFavoriteChanged,
                 ),
               ),
             ],
@@ -140,7 +142,7 @@ class _FeatureddealwidgetState extends State<Featureddealwidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(5), // Padding for the container
+                          padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: Color(0xFFED4226),
                             borderRadius: BorderRadius.only(
@@ -153,7 +155,7 @@ class _FeatureddealwidgetState extends State<Featureddealwidget> {
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              fontSize: 12, // Adjust font size as needed
+                              fontSize: 12,
                             ),
                           ),
                         ),
@@ -167,7 +169,6 @@ class _FeatureddealwidgetState extends State<Featureddealwidget> {
                         alignment: Alignment.center,
                         children: [
                           ClipRRect(
-                            // Circular border radius
                             child: Container(
                               width: 40,
                               height: 40,
@@ -180,10 +181,10 @@ class _FeatureddealwidgetState extends State<Featureddealwidget> {
                             ),
                           ),
                           Image.asset(
-                            'assets/ShoppingTrolley.png', // Path to your icon image
+                            'assets/ShoppingTrolley.png',
                             width: 20,
                             height: 20,
-                            color: Colors.white, // This will apply a white tint to your icon image
+                            color: Colors.white,
                           ),
                         ],
                       ),

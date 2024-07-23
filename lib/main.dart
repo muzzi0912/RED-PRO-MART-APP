@@ -100,23 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // AnimatedSmoothIndicator(
-                        //   activeIndex: _current,
-                        //   count: 4, // Corrected to match the number of images
-                        //   effect: ExpandingDotsEffect(
-                        //     dotHeight: screenHeight * 0.01,
-                        //     dotWidth: screenHeight * 0.01,
-                        //     activeDotColor: Constants.sliderColor,
-                        //     dotColor: Colors.white,
-                        //
-                        //   ),     onDotClicked: (index) {
-                        //   _pageController.animateToPage(
-                        //     index,
-                        //     duration: Duration(milliseconds: 500),
-                        //     curve: Curves.easeInOut,
-                        //   );
-                        // },
-                        // ),
+
                       ],
                     ),
                   ),

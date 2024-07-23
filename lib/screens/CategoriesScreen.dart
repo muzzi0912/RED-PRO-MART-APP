@@ -79,14 +79,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white,
-
+title: Text(
+  'Categories',
+  style: GoogleFonts.poppins(fontSize: 24),
+),centerTitle: true,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},   style: TextButton.styleFrom(
-          overlayColor: Colors.transparent,
-        ),
+        leading:  GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 30,
+          ),
         ),
         actions: [
           IconButton(
@@ -105,31 +115,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                        );
-                      },
-                      child: Image.asset(
-                        'assets/backButton.png', // Replace with your back button image path
-                        height: 30,
-                        width: 30,
-                      ),
-                    ),
-SizedBox(width: 100,),
-                    Center(
-                      child: Text(
-                        'Categories',
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
-SizedBox(height: 20,),
+
+
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),

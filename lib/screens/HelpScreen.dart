@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
 import 'package:redpro_mart/screens/wishlistScreen.dart';
@@ -43,7 +44,9 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Help Center'),
+        title: Text('Help Center',style: GoogleFonts.poppins(
+          fontSize: 24,)),
+
         leading: GestureDetector(
           onTap: () {
             Navigator.push(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:redpro_mart/screens/CheckoutScreen.dart';
 import 'dart:ui'; // For BackdropFilter
 
 import 'ShippingScreen.dart';
@@ -35,15 +36,29 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: AppBar(title:  Text(
+        'Payment',
+        style: GoogleFonts.poppins(
+
+          fontSize: 24,
+          color: Colors.black,
+        ),
+      ),centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
+        leading:GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CheckoutScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 30,
           ),
         ),
         actions: [
@@ -64,37 +79,7 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            child: Container(
-                              width: 60, // Set the width for the back button
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShippingScreen()),
-                                  );
-                                },
-                                child: Image.asset(
-                                  'assets/backButton.png', // Replace with your back button image path
-                                  height: 30,
-                                  width: 30,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              'Payment',
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ),
-                        ],
-                      ),
+
                       Center(
                         child: Lottie.asset(
                           'assets/lottieFile.json', // Replace with your Lottie animation path
@@ -173,56 +158,70 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: Stack(
                       children: [
-                        Text(
-                          'TID # 12345678985',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        Positioned(
+                          top: 5,
+                          right: 5,
+                          child: IconButton(
+                            icon: Icon(Icons.close),
+                            color: Colors.black,
+                            onPressed: _hideEReceipt,
                           ),
                         ),
-                        Divider(color: Colors.black),
-                        Text(
-                          'Money Transfer',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        _buildReceiptRow('Transferred Amount', 'Rs 4,000.00'),
-                        _buildReceiptRow('Fee', 'Rs 00'),
-                        _buildReceiptRow('Receiver Name', 'John Doe'),
-                        _buildReceiptRow('Account Number', '************'),
-                        _buildReceiptRow('Bank', 'Bank of America'),
-                        _buildReceiptRow('Transaction Date', '21 Sep 2021'),
-                        _buildReceiptRow('Transaction time', '12:05 am'),
-                        Divider(color: Colors.black),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                // Share functionality here
-                              },
-                              child: Text(
-                                'Share',
-                                style: TextStyle(color: Colors.black),
+                            Text(
+                              'TID # 12345678985',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                // Save functionality here
-                              },
-                              child: Text(
-                                'Save',
-                                style: TextStyle(color: Colors.black),
+                            Divider(color: Colors.black),
+                            Text(
+                              'Money Transfer',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
                               ),
+                            ),
+                            SizedBox(height: 20),
+                            _buildReceiptRow('Transferred Amount', 'Rs 4,000.00'),
+                            _buildReceiptRow('Fee', 'Rs 00'),
+                            _buildReceiptRow('Receiver Name', 'John Doe'),
+                            _buildReceiptRow('Account Number', '************'),
+                            _buildReceiptRow('Bank', 'Bank of America'),
+                            _buildReceiptRow('Transaction Date', '21 Sep 2021'),
+                            _buildReceiptRow('Transaction time', '12:05 am'),
+                            Divider(color: Colors.black),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    // Share functionality here
+                                  },
+                                  child: Text(
+                                    'Share',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // Save functionality here
+                                  },
+                                  child: Text(
+                                    'Save',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
+
                       ],
                     ),
                   ),

@@ -1,8 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:redpro_mart/AuthScreens/loginScreen.dart';
-import 'package:shimmer/shimmer.dart'; // Import shimmer package
+import 'package:shimmer/shimmer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../utils/constants.dart';
 
 class CreateAccountScreen extends StatefulWidget {
@@ -11,7 +15,19 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final ImagePicker _picker = ImagePicker();
+  XFile? _imageFile;
+
   bool _obscurePassword = true;
+  bool _isEmailValid = false;
+  bool _isUsernameValid = false;
+  bool _isPhoneValid = false;
+
+  String _username = '';
+  String _email = '';
+  String _password = '';
+  String _phone = '';
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -19,9 +35,101 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     });
   }
 
-  void _requestPermission() {
-    // Implement permission request logic here
-    print('Requesting permission...');
+  void _validateEmail(String email) {
+    setState(() {
+      _isEmailValid = RegExp(
+        r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+      ).hasMatch(email);
+      _email = email;
+    });
+  }
+
+  void _validateUsername(String username) {
+    setState(() {
+      _isUsernameValid = username.length >= 3;
+      _username = username;
+    });
+  }
+
+  void _validatePhone(String phone) {
+    setState(() {
+      _isPhoneValid = phone.isNotEmpty;
+      _phone = phone;
+    });
+  }
+
+  Future<void> _pickImage() async {
+    // Request permissions
+    final status = await Permission.camera.request();
+    final galleryStatus = await Permission.photos.request();
+
+    if (status.isGranted && galleryStatus.isGranted) {
+      // Show options for camera or gallery
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Camera'),
+              onTap: () async {
+                Navigator.pop(context);
+                final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+                if (pickedFile != null) {
+                  setState(() {
+                    _imageFile = XFile(pickedFile.path);
+                  });
+                }
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Gallery'),
+              onTap: () async {
+                Navigator.pop(context);
+                final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+                if (pickedFile != null) {
+                  setState(() {
+                    _imageFile = XFile(pickedFile.path);
+                  });
+                }
+              },
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Handle permission denial
+      Fluttertoast.showToast(
+        msg: 'Please grant the required permissions.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black.withOpacity(0.8),
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
+  }
+
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black.withOpacity(0.8),
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
+  void _signup() {
+    if (_formKey.currentState!.validate() && _isUsernameValid && _isEmailValid && _isPhoneValid) {
+      // Handle signup logic here
+      _showToast('Signup successful!');
+    } else {
+      _showToast('Please fill in all fields correctly.');
+    }
   }
 
   @override
@@ -29,253 +137,313 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     final screenWidth = Constants.screenWidth(context);
     final screenHeight = Constants.screenHeight(context);
 
-    return Container(
-      height: screenHeight, // Adjust height as needed
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/Signup.png'), // Replace with your background image path
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: Constants.screenHeightFraction(context, 0.12)),
-                Shimmer.fromColors(
-                  baseColor: Colors.black,
-                  highlightColor: Colors.white,
-                  child: Text(
-                    'Create',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenWidth * 0.1,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Shimmer.fromColors(
-                  baseColor: Colors.black,
-                  highlightColor: Colors.white,
-                  child: Text(
-                    'Account',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenWidth * 0.1,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.03)),
-                Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Handle camera icon tap
-                        },
-                        child: Container(
-                          width: screenWidth * 0.2,
-                          height: screenWidth * 0.2,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Constants.mainAppColor,
-                              width: 2.0,
-                            ),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Constants.buttonColor,
-                              size: screenWidth * 0.1,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 204,
-                      child: GestureDetector(
-                        onTap: _requestPermission,
-                        child: Container(
-                          width: screenWidth * 0.1,
-                          height: screenWidth * 0.1,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.add_circle_outline,
-                              color: Constants.buttonColor,
-                              size: screenWidth * 0.05,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.04)),
-                TextField(
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Username',
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                TextField(
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Email',
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                TextField(
-                  cursorColor: Colors.black,
-                  obscureText: _obscurePassword,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Password',
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: _togglePasswordVisibility,
-                      child: Icon(
-                        _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          Container(
+            height: screenHeight,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/Signup.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: Constants.screenHeightFraction(context, 0.12)),
+                  Shimmer.fromColors(
+                    baseColor: Colors.black,
+                    highlightColor: Colors.white,
+                    child: Text(
+                      'Create',
+                      style: GoogleFonts.poppins(
+                        fontSize: screenWidth * 0.1,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                IntlPhoneField(
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Your number',
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  initialCountryCode: 'US', // Initial country code
-                  onChanged: (phone) {
-                    print(phone.completeNumber); // Outputs the complete number with country code
-                  },
-                  dropdownDecoration: BoxDecoration(
-                    color: Colors.grey[200],
-                  ),
-                  dropdownIcon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.orange,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Shimmer.fromColors(
-                      baseColor: Colors.black,
-                      highlightColor: Colors.white,
-                      child: TextButton(
-                        onPressed: () {
-                          // Handle navigation to login
-                        },
-                        style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
-                        ),
-                        child: Text(
-                          'Already have an account?',
-                          style: Constants.poppins(
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                        ),
+                  Shimmer.fromColors(
+                    baseColor: Colors.black,
+                    highlightColor: Colors.white,
+                    child: Text(
+                      'Account',
+                      style: GoogleFonts.poppins(
+                        fontSize: screenWidth * 0.1,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
-                Center(
-                  child: Column(
+                  ),
+                  SizedBox(height: Constants.screenHeightFraction(context, 0.03)),
+                  Stack(
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()),
-                          );
-                          // Handle signup logic
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.buttonColor,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: Constants.screenWidthFraction(context, 0.30),
-                            vertical: Constants.screenHeightFraction(context, 0.02),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text(
-                          'Signup',
-                          style: Constants.poppins(
-                            fontSize: 17,
-                            color: Colors.white,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: _pickImage,
+                          child: Container(
+                            width: screenWidth * 0.2,
+                            height: screenWidth * 0.2,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Constants.mainAppColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Center(
+                              child: _imageFile == null
+                                  ? Icon(
+                                Icons.camera_alt_outlined,
+                                color: Constants.buttonColor,
+                                size: screenWidth * 0.1,
+                              )
+                                  : Image.file(
+                                File(_imageFile!.path),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginScreen()));
-                          // Handle cancel logic
-                        },
-                        style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
+                      Positioned(
+                        bottom: 0,
+                        right: 204,  // Adjusted from 204 to 0 to position the button in the bottom right corner
+                        child: GestureDetector(
+                          onTap: _pickImage,  // Updated method to open image picker options
+                          child: Container(
+                            width: screenWidth * 0.1,
+                            height: screenWidth * 0.1,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.add_circle_outline,
+                                color: Constants.buttonColor,
+                                size: screenWidth * 0.05,
+                              ),
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          'Cancel',
-                          style: Constants.poppins(
-                            color: Colors.black,
+                      ),
+
+                    ],
+                  ),
+                  SizedBox(height: Constants.screenHeightFraction(context, 0.04)),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(color: Colors.black),
+                            labelText: 'Username',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a username';
+                            } else if (value.length < 3) {
+                              return 'Username must be at least 3 characters';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            _validateUsername(value);
+                          },
+                        ),
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
+                        TextFormField(
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(color: Colors.black),
+                            labelText: 'Email',
+                            suffixIcon: _isEmailValid
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : null,
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter an email';
+                            } else if (!_isEmailValid) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            _validateEmail(value);
+                          },
+                        ),
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
+                        TextFormField(
+                          cursorColor: Colors.black,
+                          obscureText: _obscurePassword,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(color: Colors.black),
+                            labelText: 'Password',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: _togglePasswordVisibility,
+                              child: Icon(
+                                _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                                color: _obscurePassword ? Colors.grey : Colors.orange,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a password';
+                            } else if (value.length < 8) {
+                              return 'Password must be at least 8 characters';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            _password = value;
+                          },
+                        ),
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            textSelectionTheme: TextSelectionThemeData(
+                              cursorColor: Colors.black,
+                            ),
+                            inputDecorationTheme: InputDecorationTheme(
+                              hintStyle: TextStyle(color: Colors.black),
+                              labelStyle: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          child: IntlPhoneField(
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              labelStyle: TextStyle(color: Colors.black),
+                              labelText: 'Your number',
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            initialCountryCode: 'US',
+                            onChanged: (phone) {
+                              _validatePhone(phone.completeNumber);
+                            },
+                            dropdownDecoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            dropdownIcon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Constants.mainAppColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Shimmer.fromColors(
+                        baseColor: Colors.black,
+                        highlightColor: Colors.white,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginScreen()),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                          ),
+                          child: Text(
+                            'Already have an account?',
+                            style: Constants.poppins(
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
+                  Center(
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: _signup,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Constants.buttonColor,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Constants.screenWidthFraction(context, 0.30),
+                              vertical: Constants.screenHeightFraction(context, 0.02),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Text(
+                            'Signup',
+                            style: Constants.poppins(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginScreen()),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                          ),
+                          child: Text(
+                            'Cancel',
+                            style: Constants.poppins(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

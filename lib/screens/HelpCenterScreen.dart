@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/profileScreen.dart';
 
 class ChatSupport extends StatefulWidget {
   @override
@@ -17,9 +18,18 @@ class _ChatSupportState extends State<ChatSupport> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.black),
-          onPressed: () {},
+        leading:  GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 40,
+          ),
         ),
         title: Row(
           children: [

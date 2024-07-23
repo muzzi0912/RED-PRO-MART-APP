@@ -22,7 +22,8 @@ class _PersistentBottomNavBarState extends State<PersistentBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white,
+      type: BottomNavigationBarType.fixed, // Ensure type is set to fixed
+      backgroundColor: Colors.white, // Explicitly set background color
       currentIndex: widget.selectedIndex,
       onTap: widget.onItemTapped,
       items: List.generate(_imagePaths.length, (index) {

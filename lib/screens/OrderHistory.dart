@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/screens/TrackingDetailScreen.dart';
 
 import 'MyOrders.dart';
@@ -8,14 +9,28 @@ import 'MyOrders.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(backgroundColor:Colors.white,
+  Widget build(BuildContext context) {    final screenWidth = MediaQuery.of(context).size.width;
+
+  return Scaffold(backgroundColor:Colors.white,
       appBar: AppBar(backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
+        title:  Text(
+          "Order History",
+          style: GoogleFonts.poppins(fontSize: screenWidth * 0.06),
+        ),centerTitle: true,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
+        leading:GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TrackingDetailScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 40,
+          ),
         ),
         actions: [
           IconButton(
@@ -28,41 +43,7 @@ class OrderHistoryScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TrackingDetailScreen()),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/backButton.png', // Replace with your back button image path
-                          height: 30,
-                          width: 40,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Order History",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ],
-                ),
-                SizedBox()
-              ],
-            ),
+
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(

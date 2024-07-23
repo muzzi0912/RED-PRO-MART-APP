@@ -47,16 +47,30 @@ class _ShippingScreenState extends State<ShippingScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: AppBar(title:  Text(
+        'Shipping',
+        style: GoogleFonts.poppins(
+          fontSize: 24,
+          color: Colors.black,
+        ),
+      ),centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.black),
-          onPressed: () {
-            // Handle menu icon tap
+        leading:GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CartScreen()),
+            );
           },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 30,
+          ),
         ),
         actions: [
           IconButton(
@@ -77,32 +91,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Image.asset(
-                      'assets/backButton.png', // Your image path
-                      width: 24.0, // Adjust width as needed
-                      height: 24.0, // Adjust height as needed
-                    ),
-                  ),
-                  Spacer(),
-                  SizedBox(width: 30,),
-                  Text(
-                    'Shipping',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenWidth * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Spacer(flex: 2),
-                ],
-              ),
-              SizedBox(height: screenHeight * 0.02),
+
               Text(
                 'Contact Information',
                 style: GoogleFonts.poppins(
@@ -337,30 +326,63 @@ class _ShippingScreenState extends State<ShippingScreen> {
                 ],
               ),
               SizedBox(height: screenHeight * 0.02),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CheckoutScreen()),
-                  );
-                  // Handle continue to shipping button tap
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Constants.buttonColor,
-                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    'Continue to Shipping',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenWidth * 0.045,
-                      color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                      );
+                      // Handle continue to shipping button tap
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Constants.buttonColor,
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: Size(screenWidth * 0.45, screenHeight * 0.07), // Adjust width as needed
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Continue to Shipping',
+                        style: GoogleFonts.poppins(
+                          fontSize: screenWidth * 0.030,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(width: screenWidth * 0.02), // Space between buttons
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                      );
+                      // Handle proceed to checkout button tap
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[200],
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: Size(screenWidth * 0.40, screenHeight * 0.07), // Adjust width as needed
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Proceed to Checkout',
+                        style: GoogleFonts.poppins(
+                          fontSize: screenWidth * 0.030,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 30,)
             ],
