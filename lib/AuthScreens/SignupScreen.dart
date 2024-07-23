@@ -214,9 +214,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       Positioned(
                         bottom: 0,
-                        right: 204,  // Adjusted from 204 to 0 to position the button in the bottom right corner
+                        right: 204, // Adjusted from 204 to 0 to position the button in the bottom right corner
                         child: GestureDetector(
-                          onTap: _pickImage,  // Updated method to open image picker options
+                          onTap: _pickImage, // Updated method to open image picker options
                           child: Container(
                             width: screenWidth * 0.1,
                             height: screenWidth * 0.1,
@@ -234,7 +234,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                   SizedBox(height: Constants.screenHeightFraction(context, 0.04)),
@@ -310,129 +309,87 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             suffixIcon: GestureDetector(
                               onTap: _togglePasswordVisibility,
                               child: Icon(
-                                _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                                color: _obscurePassword ? Colors.grey : Colors.orange,
+                                _obscurePassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter a password';
-                            } else if (value.length < 8) {
-                              return 'Password must be at least 8 characters';
+                            } else if (value.length < 6) {
+                              return 'Password must be at least 6 characters';
                             }
                             return null;
                           },
                           onChanged: (value) {
-                            _password = value;
+                            setState(() {
+                              _password = value;
+                            });
                           },
                         ),
                         SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                        Theme(
-                          data: Theme.of(context).copyWith(
-                            textSelectionTheme: TextSelectionThemeData(
-                              cursorColor: Colors.black,
-                            ),
-                            inputDecorationTheme: InputDecorationTheme(
-                              hintStyle: TextStyle(color: Colors.black),
-                              labelStyle: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          child: IntlPhoneField(
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              labelStyle: TextStyle(color: Colors.black),
-                              labelText: 'Your number',
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                            initialCountryCode: 'US',
-                            onChanged: (phone) {
-                              _validatePhone(phone.completeNumber);
-                            },
-                            dropdownDecoration: BoxDecoration(
-                              color: Colors.grey[200],
+                        IntlPhoneField(
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(color: Colors.black),
+                            labelText: 'Phone Number',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                            ),
-                            dropdownIcon: Icon(
-                              Icons.arrow_drop_down,
-                              color: Constants.mainAppColor,
+                              borderSide: BorderSide.none,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Shimmer.fromColors(
-                        baseColor: Colors.black,
-                        highlightColor: Colors.white,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginScreen()),
-                            );
+                          initialCountryCode: 'US',
+                          onChanged: (phone) {
+                            _validatePhone(phone.completeNumber);
                           },
-                          style: TextButton.styleFrom(
-                            overlayColor: Colors.transparent,
-                          ),
-                          child: Text(
-                            'Already have an account?',
-                            style: Constants.poppins(
-                              fontSize: 12,
-                              color: Colors.black,
-                            ),
-                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
-                  Center(
-                    child: Column(
-                      children: [
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.04)),
                         ElevatedButton(
                           onPressed: _signup,
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(fontSize: 16,color: Colors.white),
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Constants.buttonColor,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Constants.screenWidthFraction(context, 0.30),
-                              vertical: Constants.screenHeightFraction(context, 0.02),
-                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                          ),
-                          child: Text(
-                            'Signup',
-                            style: Constants.poppins(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            minimumSize: Size(double.infinity, 50),
                           ),
                         ),
-                        SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
-                        TextButton(
-                          onPressed: () {
+                        SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
+                        GestureDetector(
+                          onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LoginScreen()),
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
                             );
                           },
-                          style: TextButton.styleFrom(
-                            overlayColor: Colors.transparent,
-                          ),
-                          child: Text(
-                            'Cancel',
-                            style: Constants.poppins(
-                              color: Colors.black,
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Already have an account? ',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Login',
+                                  style: TextStyle(
+                                    color: Constants.buttonColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

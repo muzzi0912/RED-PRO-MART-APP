@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpro_mart/screens/About.dart';
 import 'package:redpro_mart/screens/HelpCenterScreen.dart';
-import 'package:redpro_mart/screens/HelpScreen.dart';
 import 'package:redpro_mart/screens/NotificationScreen.dart';
 import 'package:redpro_mart/screens/ReturnAndRefundPolicy.dart';
 import 'package:redpro_mart/screens/ShippingPolicy.dart';
@@ -10,7 +9,9 @@ import 'package:redpro_mart/screens/filterScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
 import 'package:redpro_mart/screens/wishlistScreen.dart';
 import '../Widgets/bottomNavBar.dart';
+import '../utils/constants.dart';
 import 'CartScreen.dart';
+import 'HelpScreen.dart';
 import 'HomeScreen.dart';
 import 'ProblemReportScreen.dart';
 
@@ -21,6 +22,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedIndex = 0; // Set initial selected index for the Cart screen
+  int _orderStatusIndex = 0; // Index for order status tabs
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -43,12 +45,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  void _onOrderStatusTapped(int index) {
+    setState(() {
+      _orderStatusIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         actions: [
@@ -60,7 +69,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      drawer: Drawer(backgroundColor: Colors.white,
+      drawer: Drawer(
+        backgroundColor: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -76,49 +86,102 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            _createDrawerItem(icon: Icons.person, text: 'My Profile', onTap: () {
-              // Navigate to profile screen
-              Navigator.pop(context); // Close the drawer
-            }),
-            _createDrawerItem(icon: Icons.rule, text: 'Terms & Condition', onTap: () {
-              Navigator.push(
+            _createDrawerItem(
+              icon: Icons.person,
+              text: 'My Profile',
+              onTap: () {
+                // Navigate to profile screen
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.rule,
+              text: 'Terms & Condition',
+              onTap: () {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Termsandconditions())); // Close the drawer
-            }),
-            _createDrawerItem(icon: Icons.chat, text: 'Chat Support', onTap: () {
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => Termsandconditions(),
+                  ),
+                ); // Close the drawer
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.chat,
+              text: 'Chat Support',
+              onTap: () {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ChatSupport()));
-            }),
-            _createDrawerItem(icon: Icons.help, text: 'Help', onTap: () {
-              // Navigate to help screen
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => ChatSupport(),
+                  ),
+                );
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.help,
+              text: 'Help',
+              onTap: () {
+                // Navigate to help screen
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HelpCenterScreen()));// Close the drawer
-            }),
-            _createDrawerItem(icon: Icons.local_shipping, text: 'Shipping Policy', onTap: () {
-              // Navigate to shipping policy screen
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => HelpCenterScreen(),
+                  ),
+                ); // Close the drawer
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.local_shipping,
+              text: 'Shipping Policy',
+              onTap: () {
+                // Navigate to shipping policy screen
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShippingPolicy()));  // Close the drawer
-            }),
-            _createDrawerItem(icon: Icons.verified_user, text: 'Return & Refund Policy', onTap: () {
-              // Navigate to return & refund policy screen
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => ShippingPolicy(),
+                  ),
+                ); // Close the drawer
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.verified_user,
+              text: 'Return & Refund Policy',
+              onTap: () {
+                // Navigate to return & refund policy screen
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Returnandrefundpolicy())); // Close the drawer
-            }),
-            _createDrawerItem(icon: Icons.info, text: 'Our Story', onTap: () {
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => Returnandrefundpolicy(),
+                  ),
+                ); // Close the drawer
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.info,
+              text: 'Our Story',
+              onTap: () {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AboutScreen()));
-            }),
-            _createDrawerItem(icon: Icons.notifications, text: 'Notification', onTap: () {
-              // Navigate to notification screen
-              Navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => AboutScreen(),
+                  ),
+                );
+              },
+            ),
+            _createDrawerItem(
+              icon: Icons.notifications,
+              text: 'Notification',
+              onTap: () {
+                // Navigate to notification screen
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotificationScreen())); // Close the drawer
-            }),
+                  MaterialPageRoute(
+                    builder: (context) => NotificationScreen(),
+                  ),
+                ); // Close the drawer
+              },
+            ),
             ListTile(
               leading: Icon(Icons.logout, color: Colors.red),
               title: Text('LOGOUT', style: TextStyle(color: Colors.red)),
@@ -147,7 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          //backgroundImage: AssetImage('assets/images/profile_picture.png'), // Your profile image path
+                          backgroundImage: AssetImage('assets/images/profile_picture.png'), // Your profile image path
                         ),
                         SizedBox(width: 16),
                         Text(
@@ -190,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -201,40 +264,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 5),
-                  GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 4,
-                    childAspectRatio: 1,
-                    physics: NeverScrollableScrollPhysics(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _createOrderStatusItem('To Pay', Icons.payment),
-                      _createOrderStatusItem('To Ship', Icons.local_shipping),
-                      _createOrderStatusItem('To Reviews', Icons.rate_review),
-                      _createOrderStatusItem('To Receive', Icons.move_to_inbox),
-                      // _createOrderStatusItem('My Returns', Icons.assignment_return),
-                      // _createOrderStatusItem('Cancellation', Icons.cancel),
+                      _createOrderStatusButton('Active', Icons.check_box, 0),
+                      _createOrderStatusButton('Completed', Icons.check_circle_outline, 1),
+                      _createOrderStatusButton('Cancel', Icons.cancel, 2),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _createManualRoute('My Returns', Icons.assignment_return, () {
-                          // Navigate to My Returns screen
-                        }),
-                        Container(
-                          height: 1,
-                          width: screenWidth * 0.09,
-                          color: Colors.grey,
-                        ),
-                        _createManualRoute('Cancellation', Icons.cancel, () {
-                          // Navigate to Cancellation screen
-                        }),
-                      ],
-                    ),
-                  )
-
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _createManualRoute('My Returns', Icons.assignment_return, () {
+                        // Navigate to My Returns screen
+                      }),
+                      Container(
+                        height: 1,
+                        width: screenWidth * 0.09,
+                        color: Colors.grey,
+                      ),
+                      _createManualRoute('Cancellation', Icons.cancel, () {
+                        // Navigate to Cancellation screen
+                      }),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  _createOrderList(),
                 ],
               ),
             ),
@@ -256,27 +312,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _createOrderStatusItem(String title, IconData icon) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, size: 32),
-        SizedBox(height: 4),
-        Text(title, style: TextStyle(fontSize: 12)),
-      ],
+  Widget _createOrderStatusButton(String title, IconData icon, int index) {
+    return GestureDetector(
+      onTap: () => _onOrderStatusTapped(index),
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: _orderStatusIndex == index ? Colors.red : Colors.grey,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              color: _orderStatusIndex == index ? Colors.red : Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
+
   Widget _createManualRoute(String title, IconData icon, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+          onTap: onTap,
+        child: Row(
         children: [
-          Icon(icon), // Replace with your desired icon
-          SizedBox(width: 8), // Space between icon and text
-          Text(title),
-        ],
+        Icon(
+        icon,
+        color: Colors.red,
       ),
+      SizedBox(width: 5),
+      Text(
+      title,
+      style: TextStyle(
+      color: Colors.red,
+      ),
+      ),
+      ],
+      ),
+      ),
+    );
+  }
+
+  Widget _createOrderList() {
+    // This widget will display a list of orders. Replace with actual data.
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 6, // Example item count
+      itemBuilder: (context, index) {
+        return Card(color: Colors.white,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundImage: AssetImage('assets/ApplesBanner.png'), // Your order image path
+            ),
+            title: Text('Red Gala Apples'),
+            subtitle: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('US  Fancy'),
+                SizedBox(width: 50,),
+                Text('04-09-2024')
+
+
+              ],
+            ),
+            trailing: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white, backgroundColor: Constants.mainAppColor, // Text color
+                side: BorderSide(color: Constants.mainAppColor, width: 10), // Border color and width
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Border radius
+                ),
+              ),
+              onPressed: () {
+                // View Order button action
+              },
+              child: Text('View Order'),
+            ),
+          ),
+        );
+      },
     );
   }
 }

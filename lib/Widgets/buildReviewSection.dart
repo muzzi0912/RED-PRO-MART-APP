@@ -10,15 +10,20 @@ Widget buildReviewSection(BuildContext context) {
         style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.03),
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-      TextField(
+      TextField(cursorColor: Colors.black,
         maxLines: 4,
         decoration: InputDecoration(
+
           hintText: 'Enter here',
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
           ),
+  focusedBorder: OutlineInputBorder(
+  borderRadius: BorderRadius.circular(8),
+  borderSide: BorderSide(
+  color: Colors.black,
         ),
       ),
-    ],
+  ))],
   );
 }
