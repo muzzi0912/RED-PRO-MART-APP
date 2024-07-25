@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
 import '../Widgets/ProductCardDuplicate.dart';
 import '../Widgets/bottomNavBar.dart';
@@ -21,8 +22,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
     HomeScreen(),
     SearchScreen(),
     CartScreen(),
-    //FavoritesScreen(),
-    //ProfileScreen(),
+    WishlistScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -75,7 +76,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
         actions: [
           IconButton(
             icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
+            onPressed: () {  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()));},
             style: TextButton.styleFrom(
               overlayColor: Colors.transparent,
             ),

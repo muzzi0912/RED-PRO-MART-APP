@@ -50,6 +50,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
       appBar: AppBar(title:  Text(
         'Shipping',
         style: GoogleFonts.poppins(
+          fontWeight: FontWeight.bold,
           fontSize: 24,
           color: Colors.black,
         ),

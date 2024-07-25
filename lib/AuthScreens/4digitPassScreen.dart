@@ -3,6 +3,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shimmer/shimmer.dart';
 import '../screens/HomeScreen.dart';
 import '../utils/constants.dart';
+import 'loginScreen.dart';
 
 class EnterCodePass extends StatefulWidget {
   @override
@@ -121,6 +122,26 @@ class _EnterCodePassState extends State<EnterCodePass> {
                       style: Constants.poppins(
                         fontSize: screenHeight * 0.025,
                         color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:20),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen()),
+                      );
+                      // Handle cancel logic
+                    },
+                    style: TextButton.styleFrom(
+                      overlayColor: Colors.transparent,
+                    ),
+                    child: Text(
+                      'Send again',
+                      style: Constants.poppins(
+                        color: Colors.black,
                       ),
                     ),
                   ),

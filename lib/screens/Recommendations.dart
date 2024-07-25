@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
@@ -59,6 +60,19 @@ class _RecommendationsState extends State<Recommendations> {
             width: 30,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },   style: TextButton.styleFrom(
+            overlayColor: Colors.transparent,
+          ),
+          ),
+        ],
         title: Text(
           'Recommendations',
           style: TextStyle(color: Colors.black),

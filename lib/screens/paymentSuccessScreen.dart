@@ -36,30 +36,27 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title:  Text(
-        'Payment',
-        style: GoogleFonts.poppins(
-
-          fontSize: 24,
-          color: Colors.black,
+      appBar: AppBar(
+        title: Text(
+          'Payment',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            color: Colors.black,
+          ),
         ),
-      ),centerTitle: true,
+        centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading:GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CheckoutScreen()),
-            );
-          },
-          child: Image.asset(
+        leading: IconButton(
+          icon: Image.asset(
             'assets/backButton.png', // Replace with your back button image path
             height: 30,
             width: 30,
           ),
+          onPressed: () {
+            Navigator.pop(context); // Close the current screen
+          },
         ),
         actions: [
           IconButton(
@@ -79,7 +76,6 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-
                       Center(
                         child: Lottie.asset(
                           'assets/lottieFile.json', // Replace with your Lottie animation path
@@ -119,8 +115,7 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        padding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 100),
+                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                       ),
                       child: Text(
                         'View Order',
@@ -148,81 +143,79 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
           if (_isEReceiptVisible)
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
-                child: Center(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 5,
-                          right: 5,
-                          child: IconButton(
-                            icon: Icon(Icons.close),
-                            color: Colors.black,
-                            onPressed: _hideEReceipt,
+              child: GestureDetector(
+                onTap: _hideEReceipt, // Close e-receipt on outside tap
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                  child: Center(
+                    child: Container(
+                      width: screenWidth * 0.9,
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              icon: Icon(Icons.close),
+                              color: Colors.black,
+                              onPressed: _hideEReceipt,
+                            ),
                           ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'TID # 12345678985',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Divider(color: Colors.black),
-                            Text(
-                              'Money Transfer',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            _buildReceiptRow('Transferred Amount', 'Rs 4,000.00'),
-                            _buildReceiptRow('Fee', 'Rs 00'),
-                            _buildReceiptRow('Receiver Name', 'John Doe'),
-                            _buildReceiptRow('Account Number', '************'),
-                            _buildReceiptRow('Bank', 'Bank of America'),
-                            _buildReceiptRow('Transaction Date', '21 Sep 2021'),
-                            _buildReceiptRow('Transaction time', '12:05 am'),
-                            Divider(color: Colors.black),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    // Share functionality here
-                                  },
-                                  child: Text(
-                                    'Share',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    // Save functionality here
-                                  },
-                                  child: Text(
-                                    'Save',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
 
-                      ],
+                          Text(
+                            'TID # 12345678985',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Divider(color: Colors.black),
+                          Text(
+                            'Money Transfer',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          _buildReceiptRow('Transferred Amount', 'Rs 4,000.00'),
+                          _buildReceiptRow('Fee', 'Rs 00'),
+                          _buildReceiptRow('Receiver Name', 'John Doe'),
+                          _buildReceiptRow('Account Number', '************'),
+                          _buildReceiptRow('Bank', 'Bank of America'),
+                          _buildReceiptRow('Transaction Date', '21 Sep 2021'),
+                          _buildReceiptRow('Transaction time', '12:05 am'),
+                          Divider(color: Colors.black),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  // Share functionality here
+                                },
+                                child: Text(
+                                  'Share',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Save functionality here
+                                },
+                                child: Text(
+                                  'Save',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

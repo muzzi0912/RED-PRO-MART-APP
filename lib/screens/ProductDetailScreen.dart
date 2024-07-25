@@ -72,22 +72,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           child: Text(
             'Product Detail',
             style: GoogleFonts.poppins(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+
+              fontSize: 24,
               color: Colors.black,
             ),
           ),
         ),
         actions: [
           IconButton(
-            icon: Container(
-              padding: EdgeInsets.all(8.0), // Adjust padding as needed
+            icon: Container(height: 30,
+              padding: EdgeInsets.all(3.0), // Adjust padding as needed
               decoration: BoxDecoration(
                 color: Colors.white, // Background color of the circle
                 shape: BoxShape.circle, // Circle shape
                 border: Border.all(
                   color: Constants.mainAppColor, // Border color
-                  width: 2.0, // Border width
+                  width: 1.0, // Border width
                 ),
               ),
               child: Icon(
@@ -110,25 +110,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Column(
                 children: [
-                  Container(
-                    width: screenWidth * 1.2,
-                    height: screenWidth * 0.5,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: imagePaths.length,
-                      itemBuilder: (context, index) {
-                        return Image.asset(
-                          imagePaths[index],
-                          fit: BoxFit.cover,
-                        );
-                      },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: screenWidth * 1.2,
+                      height: screenWidth * 0.5,
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: imagePaths.length,
+                        itemBuilder: (context, index) {
+                          return Image.asset(
+                            imagePaths[index],
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8.0),
@@ -151,181 +154,207 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Category: ',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      TextSpan(
-                        text: 'Apple',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ],
-                  ),
-                ),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Availability: ',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      TextSpan(
-                        text: 'in stock',
-                        style: TextStyle(color: Colors.green),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10,),
-            const Text(
-              'Fresh Gala Apples',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ), SizedBox(height: 10,),
-            const Row(
-              children: [
-                Text(
-                  '\$600.72',
-                  style: TextStyle(fontSize: 24, color: Colors.red),
-                ),
-                SizedBox(width: 8.0),
-                Text(
-                  '\$800.00',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey,
-                    decoration: TextDecoration.lineThrough,
-                  ),
-                ),
-                SizedBox(width: 5.0),
-                Icon(Icons.star, color: Colors.amber),
-                Icon(Icons.star, color: Colors.amber),
-                Icon(Icons.star, color: Colors.amber),
-                Icon(Icons.star, color: Colors.amber),
-                Icon(Icons.star_border, color: Colors.amber),
-                SizedBox(width: 8.0),
-                Text('(04)'),
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            const Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s... Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s...',
-              style: TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 12.0),
-            RichText(
-              text: const TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Quantity Available: ',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  TextSpan(
-                    text: '1000',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15.0),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            const SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildSectionTitle('Sizes: '),
-                  _buildChips(sizes, selectedSizes),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15.0),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _buildSectionTitle('Grades: '),
-                  _buildChips(grades, selectedGrades),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildSectionTitle('Buy item:'),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove_circle_outline, color: Colors.deepOrange),
-                      onPressed: () {
-                        setState(() {
-                          if (quantity > 1) quantity--;
-                        });
-                      },
+                  RichText(
+                    text: const TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Category: ',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        TextSpan(
+                          text: 'Apple',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
                     ),
-                    Text('$quantity'),
-                    IconButton(
-                      icon: const Icon(Icons.add_circle, color: Colors.deepOrange),
-                      onPressed: () {
-                        setState(() {
-                          quantity++;
-                        });
-                      },
+                  ),
+                  RichText(
+                    text: const TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Availability: ',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        TextSpan(
+                          text: 'in stock',
+                          style: TextStyle(color: Colors.green),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: const Text(
+                'Fresh Gala Apples',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: const Row(
+                children: [
+                  Text(
+                    '\$600.72',
+                    style: TextStyle(fontSize: 24, color: Colors.red),
+                  ),
+                  SizedBox(width: 8.0),
+                  Text(
+                    '\$800.00',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                  SizedBox(width: 5.0),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star_border, color: Colors.amber),
+                  SizedBox(width: 8.0),
+                  Text('(04)'),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8,right: 8),
+              child: const Text(
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s... Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s...',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            const SizedBox(height: 5.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Quantity Available: ',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    TextSpan(
+                      text: '1000',
+                      style: TextStyle(color: Colors.red),
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
-            const SizedBox(height: 15.0),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    icon: const Icon(Icons.shopping_bag_outlined),
-                    label: const Text('Add to cart'),
-                    onPressed: () {
-                      // Handle add to cart functionality
-                    },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.deepOrange,
-                      side: const BorderSide(color: Colors.deepOrange),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            const SizedBox(height: 5.0),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Row(
+                  children: [
+                    _buildSectionTitle('Sizes: '),
+                    _buildChips(sizes, selectedSizes),
+                  ],
+                ),
+              ),
+            ),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Row(
+                  children: [
+                    _buildSectionTitle('Grades: '),
+                    _buildChips(grades, selectedGrades),
+                  ],
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 8,right: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildSectionTitle('Buy item:'),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline, color: Colors.deepOrange),
+                        onPressed: () {
+                          setState(() {
+                            if (quantity > 1) quantity--;
+                          });
+                        },
+                      ),
+                      Text('$quantity'),
+                      IconButton(
+                        icon: const Icon(Icons.add_circle, color: Colors.deepOrange),
+                        onPressed: () {
+                          setState(() {
+                            quantity++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 10,right: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.shopping_bag_outlined),
+                      label: const Text('Add to cart'),
+                      onPressed: () {
+                        // Handle add to cart functionality
+                      },
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.deepOrange,
+                        side: const BorderSide(color: Colors.deepOrange),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 8.0),
-                Expanded(
-                  child: ElevatedButton(
-                    child: const Text(
-                      'Checkout',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CheckoutScreen()));
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => PaymentSuccessScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepOrange,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: ElevatedButton(
+                      child: const Text(
+                        'Checkout',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CheckoutScreen()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (context) => PaymentSuccessScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepOrange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

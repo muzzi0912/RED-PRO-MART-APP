@@ -593,6 +593,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   Widget _buildCategoryCircle(BuildContext context, String assetPath,
       String label) {
     return GestureDetector(

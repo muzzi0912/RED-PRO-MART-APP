@@ -37,9 +37,14 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
+  int _getTotalItemCount() {
+    return _quantities.fold(0, (sum, item) => sum + item);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final totalItemCount = _getTotalItemCount();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -72,12 +77,42 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(CupertinoIcons.bag),
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  overlayColor: Colors.transparent,
+                ),
+              ),
+              if (totalItemCount > 0)
+                Positioned(
+                  right: 5,
+                  top: 3,
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 18,
+                      minHeight: 18,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '$totalItemCount',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
         ],
       ),

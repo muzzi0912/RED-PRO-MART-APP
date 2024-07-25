@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:redpro_mart/screens/About.dart';
-import 'package:redpro_mart/screens/HelpCenterScreen.dart';
-import 'package:redpro_mart/screens/NotificationScreen.dart';
-import 'package:redpro_mart/screens/ReturnAndRefundPolicy.dart';
-import 'package:redpro_mart/screens/ShippingPolicy.dart';
-import 'package:redpro_mart/screens/TermsAndConditions.dart';
-import 'package:redpro_mart/screens/filterScreen.dart';
-import 'package:redpro_mart/screens/searchScreen.dart';
-import 'package:redpro_mart/screens/wishlistScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Widgets/bottomNavBar.dart';
 import '../utils/constants.dart';
+import 'About.dart';
 import 'CartScreen.dart';
+import 'HelpCenterScreen.dart';
 import 'HelpScreen.dart';
 import 'HomeScreen.dart';
 import 'ProblemReportScreen.dart';
+import 'ShippingPolicy.dart';
+import 'TermsAndConditions.dart';
+import 'filterScreen.dart';
+import 'searchScreen.dart';
+import 'wishlistScreen.dart';
+import 'EditProfileScreen.dart'; // Add this import for the Edit Profile screen
+import 'NotificationScreen.dart'; // Add this import for the Notification screen
+import 'Returnandrefundpolicy.dart'; // Add this import for the Return and Refund Policy screen
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -21,8 +23,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int _selectedIndex = 0; // Set initial selected index for the Cart screen
-  int _orderStatusIndex = 0; // Index for order status tabs
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+  int _orderStatusIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -36,12 +39,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    // Navigate to the selected screen in the persistent bottom navigation
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => _widgetOptions[index],
       ),
+    );
+  }
+  void _showProfileOptionsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text('Modify Profile'),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EditProfileScreen(),
+                  ),
+                );
+              },
+              child: Text('Edit Profile'),
+            ),
+            // Add more options if needed
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -57,14 +88,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red[900],
+        leading: IconButton(
+          icon: Icon(Icons.menu, color: Colors.white),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Colors.white),
             onPressed: () {
-              // Settings action
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditProfileScreen(), // Link to Edit Profile Screen
+                ),
+              );
             },
           ),
         ],
@@ -76,38 +119,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.red[900]),
-              accountName: Text("John Doe"),
+              accountName: Text("John Doe", style: GoogleFonts.poppins(color: Colors.white)),
               accountEmail: null,
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
                   "J",
-                  style: TextStyle(fontSize: 40.0),
+                  style: GoogleFonts.poppins(fontSize: 40.0),
                 ),
               ),
             ),
             _createDrawerItem(
-              icon: Icons.person,
+              imagePath: 'assets/Profile1.png',
               text: 'My Profile',
               onTap: () {
-                // Navigate to profile screen
-                Navigator.pop(context); // Close the drawer
+                Navigator.pop(context);
               },
             ),
             _createDrawerItem(
-              icon: Icons.rule,
-              text: 'Terms & Condition',
+              imagePath: 'assets/TermCond.png',
+              text: 'Terms & Conditions',
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Termsandconditions(),
                   ),
-                ); // Close the drawer
+                );
               },
             ),
             _createDrawerItem(
-              icon: Icons.chat,
+              imagePath: 'assets/chatSupport.png',
               text: 'Chat Support',
               onTap: () {
                 Navigator.push(
@@ -119,46 +161,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
             _createDrawerItem(
-              icon: Icons.help,
+              imagePath: 'assets/Help.png',
               text: 'Help',
               onTap: () {
-                // Navigate to help screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => HelpCenterScreen(),
                   ),
-                ); // Close the drawer
+                );
               },
             ),
             _createDrawerItem(
-              icon: Icons.local_shipping,
+              imagePath: 'assets/ShippingPolicy.png',
               text: 'Shipping Policy',
               onTap: () {
-                // Navigate to shipping policy screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ShippingPolicy(),
                   ),
-                ); // Close the drawer
+                );
               },
             ),
             _createDrawerItem(
-              icon: Icons.verified_user,
+              imagePath: 'assets/Return.png',
               text: 'Return & Refund Policy',
               onTap: () {
-                // Navigate to return & refund policy screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Returnandrefundpolicy(),
                   ),
-                ); // Close the drawer
+                );
               },
             ),
             _createDrawerItem(
-              icon: Icons.info,
+              imagePath: 'assets/chatSupport.png',
+              text: 'Filter',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FilterScreen(),
+                  ),
+                );
+              },
+            ), _createDrawerItem(
+              imagePath: 'assets/Help.png',
+              text: 'Problem',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProblemReportScreen(),
+                  ),
+                );
+              },
+            ),
+            _createDrawerItem(
+              imagePath: 'assets/OutStory.png',
               text: 'Our Story',
               onTap: () {
                 Navigator.push(
@@ -170,24 +232,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
             _createDrawerItem(
-              icon: Icons.notifications,
-              text: 'Notification',
+              imagePath: 'assets/notification.png',
+              text: 'Notifications',
               onTap: () {
-                // Navigate to notification screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => NotificationScreen(),
                   ),
-                ); // Close the drawer
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout, color: Colors.red),
-              title: Text('LOGOUT', style: TextStyle(color: Colors.red)),
+              leading: IconButton(onPressed: () {}, icon: Icon(Icons.logout, color: Colors.red)),
+              title: Text('Logout', style: GoogleFonts.poppins(color: Colors.red)),
               onTap: () {
-                // Log out action
-                Navigator.pop(context); // Close the drawer
+                Navigator.pop(context);
               },
             ),
           ],
@@ -210,12 +270,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          backgroundImage: AssetImage('assets/images/profile_picture.png'), // Your profile image path
+                          //  backgroundImage: AssetImage('assets/images/profile_picture.png'),
                         ),
                         SizedBox(width: 16),
                         Text(
                           'John Doe',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: GoogleFonts.poppins(color: Colors.white, fontSize: 18),
                         ),
                       ],
                     ),
@@ -227,11 +287,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Text(
                               '0',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.poppins(color: Colors.white),
                             ),
                             Text(
                               'My Wishlist',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.poppins(color: Colors.white),
                             ),
                           ],
                         ),
@@ -239,11 +299,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Text(
                               '0',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.poppins(color: Colors.white),
                             ),
                             Text(
                               'My Orders',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.poppins(color: Colors.white),
                             ),
                           ],
                         ),
@@ -261,35 +321,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Text(
                     'My Orders',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _createOrderStatusButton('Active', Icons.check_box, 0),
-                      _createOrderStatusButton('Completed', Icons.check_circle_outline, 1),
-                      _createOrderStatusButton('Cancel', Icons.cancel, 2),
+                      _createOrderStatusButton('Active', 'assets/Active.png', 0),
+                      _createOrderStatusButton('Completed', 'assets/Cmp.png', 1),
+                      _createOrderStatusButton('Cancel', 'assets/Cancel.png', 2),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _createManualRoute('My Returns', Icons.assignment_return, () {
-                        // Navigate to My Returns screen
-                      }),
-                      Container(
-                        height: 1,
-                        width: screenWidth * 0.09,
-                        color: Colors.grey,
-                      ),
-                      _createManualRoute('Cancellation', Icons.cancel, () {
-                        // Navigate to Cancellation screen
-                      }),
-                    ],
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _createManualRoute('My Returns', 'assets/MyReturns.png', () {
+                          // Navigate to My Returns screen
+                        }),
+                        Container(
+                          height: 1,
+                          width: screenWidth * 0.09,
+                          color: Colors.grey,
+                        ),
+                        _createManualRoute('Cancellation', 'assets/My Cancellation.png', () {
+                          // Navigate to Cancellation screen
+                        }),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 10),
+                  Divider(thickness: 1),
                   _createOrderList(),
                 ],
               ),
@@ -304,98 +368,92 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _createDrawerItem({required IconData icon, required String text, required VoidCallback onTap}) {
+  Widget _createDrawerItem({required String imagePath, required String text, required VoidCallback onTap}) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(text),
+      leading: Image.asset(imagePath, width: 24, height: 24),
+      title: Text(text, style: GoogleFonts.poppins(color: Colors.black)),
       onTap: onTap,
     );
   }
 
-  Widget _createOrderStatusButton(String title, IconData icon, int index) {
+  Widget _createOrderStatusButton(String label, String imagePath, int index) {
     return GestureDetector(
       onTap: () => _onOrderStatusTapped(index),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: _orderStatusIndex == index ? Colors.red : Colors.grey,
-          ),
+          Image.asset(imagePath, height: 30),
           Text(
-            title,
-            style: TextStyle(
-              color: _orderStatusIndex == index ? Colors.red : Colors.grey,
-            ),
+            label,
+            style: GoogleFonts.poppins(fontSize: 16, color: _orderStatusIndex == index ? Colors.red : Colors.black),
           ),
         ],
       ),
     );
   }
 
-
-  Widget _createManualRoute(String title, IconData icon, VoidCallback onTap) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-          onTap: onTap,
-        child: Row(
+  Widget _createManualRoute(String label, String imagePath, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
         children: [
-        Icon(
-        icon,
-        color: Colors.red,
-      ),
-      SizedBox(width: 5),
-      Text(
-      title,
-      style: TextStyle(
-      color: Colors.red,
-      ),
-      ),
-      ],
-      ),
+          Image.asset(imagePath, height: 50),
+          SizedBox(height: 5),
+          Text(label, style: GoogleFonts.poppins(fontSize: 16)),
+        ],
       ),
     );
   }
 
   Widget _createOrderList() {
-    // This widget will display a list of orders. Replace with actual data.
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: 6, // Example item count
+      itemCount: 6,
       itemBuilder: (context, index) {
-        return Card(color: Colors.white,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/ApplesBanner.png'), // Your order image path
-            ),
-            title: Text('Red Gala Apples'),
-            subtitle: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('US  Fancy'),
-                SizedBox(width: 50,),
-                Text('04-09-2024')
-
-
-              ],
-            ),
-            trailing: OutlinedButton(
+        return ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+          leading: CircleAvatar(
+            backgroundColor: Colors.white,
+            backgroundImage: AssetImage('assets/ApplesBanner.png'),
+          ),
+          title: Text('Red Gala Apples', style: GoogleFonts.poppins()),
+          subtitle: Row(
+            children: [
+              Text('US Fancy', style: GoogleFonts.poppins()),
+              SizedBox(width: 8),
+              Text('04-09-2024', style: GoogleFonts.poppins()),
+            ],
+          ),
+          trailing: SizedBox(
+            width: 90,
+            height: 40,
+            child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Constants.mainAppColor, // Text color
-                side: BorderSide(color: Constants.mainAppColor, width: 10), // Border color and width
+                foregroundColor: Colors.white,
+                backgroundColor: Constants.mainAppColor, // Button color
+                side: BorderSide(color: Constants.mainAppColor, width: 2), // Border color and width
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Border radius
                 ),
+                padding: EdgeInsets.symmetric(vertical: 0.0), // Reduced vertical padding for height
               ),
               onPressed: () {
                 // View Order button action
               },
-              child: Text('View Order'),
+              child: Center(
+                child: Text(
+                  'View Order',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 12, // Adjust font size if needed
+                  ),
+                ),
+              ),
             ),
           ),
         );
       },
     );
   }
+
 }

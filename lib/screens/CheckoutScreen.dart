@@ -18,25 +18,26 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int _selectedPaymentIndex = 0; // Track selected payment method index
+  String _selectedShippingOption = 'Standard'; // Track selected shipping option
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title:Text(
-        'Checkout',
-        style: GoogleFonts.poppins( fontSize: 24),
-      ) ,
+      appBar: AppBar(
+        title: Text(
+          'Checkout',
+          style: GoogleFonts.poppins(fontSize: 24),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading:GestureDetector(
+        leading: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           },
           child: Image.asset(
@@ -57,9 +58,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
       body: Column(
         children: [
-
-
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
@@ -87,9 +85,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ],
                   ),
-                  buildShippingOption(),
+                  buildShippingOptions(),
                   Divider(height: 38),
                   buildSubtotal(),
+                  SizedBox(height: 16),
+                  buildSectionTitle('Additional Charges'),
+                  SizedBox(height: 8),
+                  buildAdditionalCharges(),
                   SizedBox(height: 16),
                   buildSectionTitle('Payment Method'),
                   buildPaymentMethods(),
@@ -131,19 +133,70 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ],
             ),
           ),
-          SizedBox(height: 5,)
+          SizedBox(height: 5),
         ],
       ),
     );
   }
 
+  Widget buildShippingOptions() {
+    return Column(
+      children: [
+        shippingOption('Standard', 'Delivery in 5-7 business days', 5.99),
+        shippingOption('Express', 'Delivery in 2-3 business days', 12.99, isSelected: _selectedShippingOption == 'Express'),
+        shippingOption('Next Day', 'Next business day delivery', 24.99),
+      ],
+    );
+  }
 
+  Widget shippingOption(String title, String description, double price, {bool isSelected = false}) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.only(bottom: 10.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: isSelected ? Color(0xffe34126) : Colors.grey,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+      ),
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+        subtitle: Text(description, style: GoogleFonts.poppins(color: Colors.grey)),
+        trailing: Text('\$${price.toStringAsFixed(2)}', style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+        onTap: () {
+          setState(() {
+            _selectedShippingOption = title;
+          });
+        },
+      ),
+    );
+  }
 
+  Widget buildAdditionalCharges() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildChargeDetail('Subtotal', '\$50.00'),
+        buildChargeDetail('VAT (5%)', '\$2.50'),
+        buildChargeDetail('Shipping Amount', '\$12.99'),
+        buildChargeDetail('Total', '\$65.49'),
+      ],
+    );
+  }
 
-
-
-
-
+  Widget buildChargeDetail(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(value, style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
 
   Widget buildPaymentMethods() {
     return SingleChildScrollView(
@@ -187,7 +240,4 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
     );
   }
-
-
-
 }

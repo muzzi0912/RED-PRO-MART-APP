@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
@@ -60,6 +61,19 @@ class _FeaturedDealsScreenState extends State<FeaturedDealsScreen> {
             width: 30,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },   style: TextButton.styleFrom(
+            overlayColor: Colors.transparent,
+          ),
+          ),
+        ],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

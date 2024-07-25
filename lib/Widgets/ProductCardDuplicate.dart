@@ -61,7 +61,7 @@ class _ProductCardDuplicateState extends State<ProductCardDuplicate> {
               ),
               Positioned(
                 top: 10,
-                right: 10,
+                right: 5,
                 child: FavoriteButton(
                   isFavorite: isFavorite,
                   iconColor: Colors.red,
@@ -139,7 +139,7 @@ class _ProductCardDuplicateState extends State<ProductCardDuplicate> {
                           ClipRRect(
                             child: Container(
                               width: 30,
-                              height: 30,
+                              height: 26,
                               color: Color(0xFFEEEEEE),
                               child: Image.asset(
                                 'assets/Rectanglebg.png',

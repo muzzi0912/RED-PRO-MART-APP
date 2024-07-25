@@ -17,6 +17,8 @@ class HelpCenterScreen extends StatefulWidget {
 
 class _HelpCenterScreenState extends State<HelpCenterScreen> {
   int _selectedIndex = 0;
+  int _expandedIndex = -1; // Track the index of the currently expanded item
+
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     SearchScreen(),
@@ -44,9 +46,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Help Center',style: GoogleFonts.poppins(
-          fontSize: 24,)),
-
+        title: Text('Help Center', style: GoogleFonts.poppins(fontSize: 24)),
         leading: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -82,24 +82,28 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                 icon: Icons.headset_mic,
                 title: 'Customer Service',
                 children: [],
+                index: 0,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.language,
                 title: 'Website',
                 children: [],
+                index: 1,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.facebook,
                 title: 'Facebook',
                 children: [],
+                index: 2,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.messenger_outline,
                 title: 'Twitter',
                 children: [],
+                index: 3,
               ),
               SizedBox(height: 10),
               buildContactItem(
@@ -119,12 +123,14 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                     ),
                   ),
                 ],
+                index: 4,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.help_outline,
                 title: 'FAQ\'s',
                 children: [],
+                index: 5,
               ),
               SizedBox(height: 10),
             ],
@@ -186,22 +192,36 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
     required IconData icon,
     required String title,
     required List<Widget> children,
+    required int index,
   }) {
     return GestureDetector(
       onTap: () {
-        // Handle tap event if necessary
+        setState(() {
+          _expandedIndex = _expandedIndex == index ? -1 : index; // Toggle expansion
+        });
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(10)),
-        child: ExpansionTile(
-          leading: Icon(icon, color: Colors.grey),
-          title: Text(title),
-          children: children,
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(icon, color: Colors.grey),
+              title: Text(title),
+            ),
+            Visibility(
+              visible: _expandedIndex == index,
+              child: Column(
+                children: children,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+

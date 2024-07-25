@@ -22,15 +22,25 @@ class _PersistentBottomNavBarState extends State<PersistentBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed, // Ensure type is set to fixed
-      backgroundColor: Colors.white, // Explicitly set background color
-      currentIndex: widget.selectedIndex,
-      onTap: widget.onItemTapped,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      currentIndex: widget.selectedIndex.clamp(0, _imagePaths.length - 1),
+      onTap: (_) {},
       items: List.generate(_imagePaths.length, (index) {
         return BottomNavigationBarItem(
-          icon: IconWidget(
-            path: _imagePaths[index],
-            isSelected: widget.selectedIndex == index,
+          icon: InkWell(
+            onTap: () {
+              if (index >= 0 && index < _imagePaths.length) {
+                widget.onItemTapped(index);
+              }
+            },
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            child: IconWidget(
+              path: _imagePaths[index],
+              isSelected: widget.selectedIndex == index,
+            ),
           ),
           label: '',
         );

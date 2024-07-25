@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/AuthScreens/ForgetScreen.dart';
 import 'package:shimmer/shimmer.dart';
@@ -39,8 +40,15 @@ class _LoginScreenState extends State<LoginScreen> {
       // For example: Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } else {
       // Show an error message if validation fails
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a valid email address')),
+      Fluttertoast.showToast(
+        msg: 'Please enter your email address',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+
       );
     }
   }
@@ -51,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final screenHeight = Constants.screenHeight(context);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -103,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           : null,
                       validator: (value) {
                         if (value == null || value.isEmpty || !_isEmailValid) {
-                          return 'Please enter a valid email address';
+                          return 'Please enter your email address';
                         }
                         return null;
                       },
@@ -113,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Email',
                       onChanged: (value) => _validateEmail(value),
                       suffixIcon: _isEmailValid
-                          ? Icon(Icons.check_circle, color: Colors.green)
+                          ? Icon(Icons.check, color: Colors.green)
                           : null,
                       validator: (value) {
                         if (value == null || value.isEmpty || !_isEmailValid) {
@@ -143,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: _togglePasswordVisibility,
                         child: Icon(
                           _obscurePassword ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                          color: _obscurePassword ? Colors.grey : Colors.orange,
+                          color: _obscurePassword ? Colors.grey : Constants.mainAppColor,
                         ),
                       ),
                     )
@@ -158,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: _togglePasswordVisibility,
                         child: Icon(
                           _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                          color: _obscurePassword ? Colors.grey : Colors.orange,
+                          color: _obscurePassword ? Colors.grey : Constants.mainAppColor,
                         ),
                       ),
                     ),
@@ -180,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               overlayColor: Colors.transparent,
                             ),
                             child: Text(
-                              'Forget Password ?',
+                              'Forgot Password ?',
                               style: Constants.poppins(
                                 color: Colors.black,
                               ),
@@ -254,7 +262,8 @@ class _LoginScreenState extends State<LoginScreen> {
     ValueChanged<String>? onChanged,
     String? Function(String?)? validator, // Add validator
   }) {
-    return CupertinoTextField(
+    return CupertinoTextField( keyboardType: TextInputType.text,
+      enableInteractiveSelection: false,
       controller: controller,
       placeholder: placeholder,
       obscureText: obscureText,
@@ -277,7 +286,9 @@ class _LoginScreenState extends State<LoginScreen> {
     String? Function(String?)? validator, // Add validator
   }) {
     return TextFormField(
-      cursorColor: Colors.black,
+      enableInteractiveSelection: false,
+      keyboardType: TextInputType.text,
+      cursorColor: Constants.mainAppColor,
       controller: controller,
       onChanged: onChanged,
       obscureText: obscureText,

@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
 import 'package:redpro_mart/screens/wishlistScreen.dart';
 import '../Widgets/bottomNavBar.dart';
+import '../Widgets/filterDialogue.dart';
 import '../utils/constants.dart';
 import '../Widgets/ProductCardDuplicate.dart';
 import 'CartScreen.dart';
@@ -35,29 +37,46 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
     );
   }
 
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return FilterDialog();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {},   style: TextButton.styleFrom(
-          overlayColor: Colors.transparent,
-        ),
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            overlayColor: Colors.transparent,
+          ),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_bag_outlined),
-            onPressed: () {},   style: TextButton.styleFrom(
+            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },   style: TextButton.styleFrom(
             overlayColor: Colors.transparent,
           ),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -76,7 +95,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                     width: 30,
                   ),
                 ),
-                SizedBox(width: 10), // Add spacing between the back button and the search bar
+                SizedBox(width: 10),
                 Expanded(
                   child: TextField(
                     cursorColor: Colors.black,
@@ -85,11 +104,11 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                       suffixIcon: Icon(Icons.search),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.black), // Outline color
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.deepOrange), // Outline color
+                        borderSide: BorderSide(color: Colors.deepOrange),
                       ),
                       fillColor: Colors.grey.shade200,
                     ),
@@ -109,10 +128,13 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                     fontFamily: 'Poppins',
                   ),
                 ),
-                Icon(
-                  Icons.filter_alt_outlined,
-                  color: Constants.mainAppColor,
-                  size: 30,
+                IconButton(
+                  icon: Icon(
+                    Icons.filter_alt_outlined,
+                    color: Constants.mainAppColor,
+                    size: 30,
+                  ),
+                  onPressed: _showFilterDialog, // Show filter dialog
                 ),
               ],
             ),
@@ -128,14 +150,14 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
             SizedBox(height: 16),
             Expanded(
               child: ListView.builder(
-                itemCount: 10, // Assuming 10 products
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
                       Row(
                         children: [
                           Expanded(
-                            child: ProductCardDuplicate( // Use ProductCardDuplicate widget
+                            child: ProductCardDuplicate(
                               imagePath: index % 2 == 0
                                   ? 'assets/grapes12.png'
                                   : 'assets/BananaCards.png',
@@ -145,9 +167,9 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                               price: index % 2 == 0 ? 2.99 : 0.99,
                             ),
                           ),
-                          SizedBox(width: 16), // Add spacing between product cards
+                          SizedBox(width: 16),
                           Expanded(
-                            child: ProductCardDuplicate( // Use ProductCardDuplicate widget
+                            child: ProductCardDuplicate(
                               imagePath: index % 2 == 0
                                   ? 'assets/BananaCards.png'
                                   : 'assets/grapes12.png',
@@ -159,7 +181,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                           ),
                         ],
                       ),
-                     const SizedBox(height: 30), // Add spacing between rows
+                      SizedBox(height: 30),
                     ],
                   );
                 },
@@ -175,3 +197,4 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
     );
   }
 }
+

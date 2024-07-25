@@ -75,12 +75,11 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading:GestureDetector(
+        leading: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           },
           child: Image.asset(
@@ -89,7 +88,6 @@ class _SearchScreenState extends State<SearchScreen> {
             width: 30,
           ),
         ),
-
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -109,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(width: 8.0),
                 Expanded(
                   child: TextField(
-                    cursorColor: Colors.black,
+                    cursorColor: Constants.mainAppColor,
                     controller: TextEditingController(text: _searchText),
                     decoration: InputDecoration(
                       suffixIcon: Icon(Icons.search),
@@ -174,14 +172,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget _buildChips(List<String> labels) {
     return Wrap(
-      spacing: 12.0,
-      runSpacing: 8.0,
+      spacing: 30.0,
+      runSpacing: 10.0,
       children: labels.map((label) {
         final isSelected = _selectedItems.contains(label);
         return GestureDetector(
           onTap: () => _onChipSelected(label),
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+          child: Container(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
             decoration: BoxDecoration(
               color: isSelected ? Colors.orange[100] : Colors.grey[100],
@@ -241,34 +238,12 @@ class _SearchScreenState extends State<SearchScreen> {
     required String description,
     required int index,
   }) {
-    final isWishlistSelected = _wishlistSelectedItems.contains(index);
-
-    return GestureDetector(
-      onTap: () => _onWishlistItemTapped(index),
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: 300.0,
-        padding: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: isWishlistSelected ? Colors.orange[100] : Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: ProductCard(
-          imagePath: imagePath,
-          title: title,
-          subtitle: description,
-          rating: 4.5,
-          price: double.parse(price.replaceAll('\$', '').replaceAll(',', '')),
-        ),
-      ),
+    return ProductCard(
+      imagePath: imagePath,
+      title: title,
+      subtitle: description,
+      rating: 4.5,
+      price: double.parse(price.replaceAll('\$', '').replaceAll(',', '')),
     );
   }
 }

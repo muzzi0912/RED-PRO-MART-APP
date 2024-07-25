@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 
+import '../utils/constants.dart';
+
 class ChatSupport extends StatefulWidget {
   @override
   _ChatSupportState createState() => _ChatSupportState();
@@ -14,7 +16,7 @@ class _ChatSupportState extends State<ChatSupport> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
@@ -34,7 +36,7 @@ class _ChatSupportState extends State<ChatSupport> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('assets/group_avatar.png'), // Replace with your asset
+              //backgroundImage: AssetImage('assets/group_avatar.png'), // Replace with your asset
             ),
             SizedBox(width: 10),
             Column(
@@ -52,7 +54,7 @@ class _ChatSupportState extends State<ChatSupport> {
                   '8 members, 5 online',
                   style: GoogleFonts.poppins(
                     color: Colors.grey,
-                    fontSize: width * 0.035,
+                    fontSize: width * 0.033,
                   ),
                 ),
               ],
@@ -79,7 +81,7 @@ class _ChatSupportState extends State<ChatSupport> {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/user_avatar.png'), // Replace with your asset
+                      //backgroundImage: AssetImage('assets/user_avatar.png'), // Replace with your asset
                     ),
                     SizedBox(width: 10),
                     Column(
@@ -127,7 +129,7 @@ class _ChatSupportState extends State<ChatSupport> {
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
+                  child: TextField(cursorColor: Constants.mainAppColor,
                     decoration: InputDecoration(
                       hintText: 'Write your message',
                       hintStyle: GoogleFonts.poppins(

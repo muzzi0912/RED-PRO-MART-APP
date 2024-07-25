@@ -66,7 +66,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                       'Please setup a new password for your account',
                       textAlign: TextAlign.center,
                       style: Constants.poppins(
-                        fontSize: screenHeight * 0.020,
+                        fontSize: screenHeight * 0.022,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -77,7 +77,8 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                       Container(
                         width: screenWidth * 0.8,
                         child: TextField(
-                          cursorColor: Colors.black,
+                          enableInteractiveSelection: false,
+                          cursorColor: Constants.mainAppColor,
                           obscureText: _isPasswordObscured,
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -104,7 +105,8 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                       Container(
                         width: screenWidth * 0.8,
                         child: TextField(
-                          cursorColor: Colors.black,
+                          enableInteractiveSelection: false,
+                          cursorColor: Constants.mainAppColor,
                           obscureText: _isNewPasswordObscured,
                           decoration: InputDecoration(
                             labelText: 'New Password',

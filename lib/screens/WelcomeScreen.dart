@@ -5,7 +5,9 @@ import 'package:redpro_mart/utils/responsive.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../AuthScreens/loginScreen.dart';
+import '../AuthScreens/onboardingScreen.dart';
 import '../utils/constants.dart';
+import 'HomeScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -45,8 +47,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: screenHeight * 0.1),
           // Static Heading
+          SizedBox(height: screenHeight * 0.1),
           Column(
             children: [
               Text(
@@ -58,23 +60,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Shimmer.fromColors(
-                baseColor: Constants.textColor,
-                highlightColor: Colors.white,
-                child: Text(
+              Text(
                   'Red Pro Mart',
-                  style: Constants.poppins(
-                    fontSize: screenHeight * 0.03,
-                    fontWeight: FontWeight.normal,
+                  style: Constants.poppins(color: Constants.mainAppColor,
+                    fontSize: screenHeight * 0.02,
+                    fontWeight: FontWeight.w600,
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
+
               SizedBox(height: screenHeight * 0.03),
             ],
           ),
           // PageView for rest of the content
           Expanded(
+            flex: 2,
             child: PageView(
               controller: _pageController,
               children: [
@@ -85,6 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ],
             ),
           ),
+          // Page Indicator
           SizedBox(height: screenHeight * 0.02),
           AnimatedSmoothIndicator(
             activeIndex: _currentPage,
@@ -102,7 +103,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               );
             },
           ),
+          SizedBox(height: screenHeight * 0.05),
+          // Text below the Page Indicator
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+            child: Text(
+              'Welcome to Red Pro Mart, your one-stop solution for all your shopping needs.',
+              style: Constants.poppins(
+                color: Colors.grey,
+                fontSize: screenHeight * 0.02,
+                fontWeight: FontWeight.normal,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
           SizedBox(height: screenHeight * 0.08),
+          // Buttons
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -133,7 +149,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
             },
             style: TextButton.styleFrom(
               overlayColor: Colors.transparent,
@@ -200,19 +216,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ],
-        ),
-        SizedBox(height: screenHeight * 0.05),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-          child: Text(
-            'Welcome to Red Pro Mart, your one-stop solution for all your shopping needs.',
-            style: Constants.poppins(
-              color: Colors.grey,
-              fontSize: screenHeight * 0.02,
-              fontWeight: FontWeight.normal,
-            ),
-            textAlign: TextAlign.center,
-          ),
         ),
       ],
     );
