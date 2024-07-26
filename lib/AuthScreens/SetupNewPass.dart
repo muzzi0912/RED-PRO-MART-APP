@@ -95,7 +95,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                                 _isPasswordObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                color: Colors.grey,
+                                color: _isPasswordObscured ? Colors.grey : Constants.mainAppColor,
                               ),
                             ),
                           ),
@@ -123,7 +123,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                                 _isNewPasswordObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                color: Colors.grey,
+                                color: _isPasswordObscured ? Colors.grey : Constants.mainAppColor
                               ),
                             ),
                           ),
@@ -139,7 +139,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => PasswordRecover()));
+                              MaterialPageRoute(builder: (context) => EnterCodePass()));
                           // Handle Save action
                         },
                         style: ElevatedButton.styleFrom(
@@ -169,7 +169,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                           // Handle cancel logic
                         },
                         style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
+                          overlayColor: Colors.orange,
                         ),
                         child: Text(
                           'Cancel',

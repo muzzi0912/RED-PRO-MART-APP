@@ -60,19 +60,7 @@ class _RecommendationsState extends State<Recommendations> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
-          ),
-          ),
-        ],
+
         title: Text(
           'Recommendations',
           style: TextStyle(color: Colors.black),
@@ -138,7 +126,7 @@ class _RecommendationsState extends State<Recommendations> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 10),
                       // Add spacing between rows
                     ],
                   );

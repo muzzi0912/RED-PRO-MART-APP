@@ -54,27 +54,14 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
+        leading:
+        Icon(Icons.menu,color: Colors.white,),
+
+
           ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
-          ),
-          ),
-        ],
-      ),
+
+
+
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
@@ -161,7 +148,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                               imagePath: index % 2 == 0
                                   ? 'assets/grapes12.png'
                                   : 'assets/BananaCards.png',
-                              title: index % 2 == 0 ? 'Grapes' : 'Banana',
+                              title: index % 2 == 0 ? 'Grapes: Yellow Plantain' : 'Bananas: Yellow Plantain',
                               subtitle: index % 2 == 0 ? 'Approx. 40lb' : 'Approx. 1lb',
                               rating: index % 2 == 0 ? 4.5 : 4.2,
                               price: index % 2 == 0 ? 2.99 : 0.99,
@@ -173,7 +160,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                               imagePath: index % 2 == 0
                                   ? 'assets/BananaCards.png'
                                   : 'assets/grapes12.png',
-                              title: index % 2 == 0 ? 'Banana' : 'Grapes',
+                              title: index % 2 == 0 ? 'Bananas: Yellow Plantain' : 'Grapes: Yellow Plantain',
                               subtitle: index % 2 == 0 ? 'Approx. 1lb' : 'Approx. 40lb',
                               rating: index % 2 == 0 ? 4.2 : 4.5,
                               price: index % 2 == 0 ? 0.99 : 2.99,
@@ -181,7 +168,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 10),
                     ],
                   );
                 },

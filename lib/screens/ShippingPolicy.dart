@@ -61,15 +61,7 @@ class _ShippingPolicyState extends State<ShippingPolicy> {
             width: 40,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -112,6 +104,42 @@ class _ShippingPolicyState extends State<ShippingPolicy> {
 
                 SizedBox(height: 10),
                 Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
                       'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
                       'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',

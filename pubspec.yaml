@@ -50,6 +50,8 @@ dependencies:
   fluttertoast:
   permission_handler:
   get:
+  animated_splash_screen:
+
 
 
 

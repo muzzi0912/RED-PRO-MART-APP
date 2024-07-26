@@ -50,7 +50,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
       appBar: AppBar(title:  Text(
         'Shipping',
         style: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
+
           fontSize: 24,
           color: Colors.black,
         ),
@@ -73,18 +73,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-              // Handle cart icon tap
-            },
-          ),
-        ],
+
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
@@ -102,7 +91,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
               ),
               SizedBox(height: screenHeight * 0.01),
               TextField(
-                cursorColor: Colors.black,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelText: 'Email or mobile number',
                   labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -112,7 +101,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.orange), // Focused border color
+                    borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                   ),
                 ),
               ),
@@ -144,7 +133,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
               ),
               SizedBox(height: screenHeight * 0.01),
               TextField(
-                cursorColor: Colors.black,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelText: 'Country/Region',
                   labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -154,18 +143,18 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                    borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.02),
               Row(
                 children: [
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'First Name',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -175,7 +164,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                            borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                           ),
                         ),
                       ),
@@ -185,7 +174,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'Last Name',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -195,7 +184,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                            borderSide: BorderSide(color:Constants.mainAppColor,), // Focused border color
                           ),
                         ),
                       ),
@@ -203,9 +192,9 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.02),
               TextField(
-                cursorColor: Colors.black,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelText: 'Street Address, Apartment no# etc',
                   labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -215,18 +204,18 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                    borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.02),
               Row(
                 children: [
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'Add Number',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -236,7 +225,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                            borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                           ),
                         ),
                       ),
@@ -246,7 +235,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'Postal Code',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -256,7 +245,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                            borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                           ),
                         ),
                       ),
@@ -264,14 +253,14 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.02),
               Row(
                 children: [
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'City',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -281,7 +270,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Constants.textColor), // Focused border color
+                            borderSide: BorderSide(color: Constants.mainAppColor,), // Focused border color
                           ),
                         ),
                       ),
@@ -291,7 +280,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextField(
-                        cursorColor: Colors.black,
+                        cursorColor: Constants.mainAppColor,
                         decoration: InputDecoration(
                           labelText: 'Province',
                           labelStyle: GoogleFonts.poppins(color: Colors.grey), // Default label color
@@ -318,7 +307,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                         isSaveInfoChecked = value ?? false;
                       });
                     },
-                    activeColor: Constants.textColor,
+                    activeColor:Constants.mainAppColor,
                   ),
                   Text(
                     'Save this information for next time',
@@ -350,7 +339,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                       child: Text(
                         'Continue to Shipping',
                         style: GoogleFonts.poppins(
-                          fontSize: screenWidth * 0.030,
+                          fontSize: screenWidth * 0.035,
                           color: Colors.white,
                         ),
                       ),
@@ -377,7 +366,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                       child: Text(
                         'Proceed to Checkout',
                         style: GoogleFonts.poppins(
-                          fontSize: screenWidth * 0.030,
+                          fontSize: screenWidth * 0.035,
                           color: Colors.black,
                         ),
                       ),

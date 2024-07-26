@@ -32,12 +32,12 @@ class OrderHistoryScreen extends StatelessWidget {
             width: 40,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(CupertinoIcons.bag),
+        //     onPressed: () {},
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -61,7 +61,7 @@ class OrderHistoryScreen extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image.asset(
-                                    'assets/banana.png',
+                                    'assets/apple.png',
                                     height: 100,
                                     width: 100,
                                     fit: BoxFit.cover,
@@ -121,7 +121,7 @@ class OrderHistoryScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Perfectly Ripe Bananas',
+                                      'Perfectly Ripe Apples',
                                       style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400),
@@ -240,43 +240,47 @@ class OrderHistoryScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  SingleChildScrollView(
-                    physics: ScrollPhysics(),
-                    child: DefaultTabController(
-                      length: 4,
-                      child: Column(
-                        children: [
-                          TabBar(
-                            labelColor: Color(0xffe34126),
-                            unselectedLabelColor: Colors.grey,
-                            indicatorColor: Color(0xffe34126),
-                            tabs: [
-                              Tab(text: 'Order'),
-                              Tab(text: 'Details'),
-                              Tab(text: 'Courier'),
-                              Tab(text: 'Receiver'),
-                            ],
-                          ),
-                          Container(
-                            height: 320, // Adjust height as needed
-                            child: TabBarView(
-                              children: [
-                                buildTrackingTimeline(), // Replace with your actual content for each tab
-                                Center(child: Text('Item details')),
-                                Center(child: Text('Courier')),
-                                Center(child: Text('Receiver')),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+
 
                 ],
               ),
             ),
+            SizedBox(height: 20),
+            Container(
+              child: DefaultTabController(
+                length: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch, // Make sure the Column takes full width
+                  children: [
+                    TabBar(
+                      labelColor: Color(0xffe34126),
+                      unselectedLabelColor: Colors.grey,
+                      indicatorColor: Color(0xffe34126),
+                      tabs: [
+                        Tab(text: 'Order'),
+                        Tab(text: 'Details'),
+                        Tab(text: 'Courier'),
+                        Tab(text: 'Receiver'),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                        height: 320, // Adjust height as needed
+                        child: TabBarView(
+                          children: [
+                            buildTrackingTimeline(), // Replace with your actual content for each tab
+                            Center(child: Text('Item details')),
+                            Center(child: Text('Courier')),
+                            Center(child: Text('Receiver')),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -292,12 +296,21 @@ class OrderHistoryScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => MyOrdersScreen()), // Replace NextScreen() with your target screen
              );
-              },
+              }, style: TextButton.styleFrom(
+              overlayColor: Colors.transparent,
+            ),
               child: Text(
-                'Next Order →',
-                style: TextStyle(color: Color(0xffe34126)),
+              'Next Order →',
+              style: TextStyle(
+                color: Color(0xffe34126), // Text color
+                decoration: TextDecoration.underline, // Underline style
+                decorationColor: Color(0xffe34126), // Underline color
+                decorationThickness: 1, // Adjust thickness if needed
               ),
             ),
+
+
+      ),
           ],
         ),
       ),
@@ -306,7 +319,7 @@ class OrderHistoryScreen extends StatelessWidget {
 
   Widget buildTrackingTimeline() {
     return Column(
-      children: [
+      children: [SizedBox(height: 10,),
         buildTimelineStep(
           isActive: true,
           isCompleted: true,
@@ -357,7 +370,7 @@ class OrderHistoryScreen extends StatelessWidget {
         Column(
           children: [
             Container(
-              height: 20,
+              height: 15,
               width: 20,
               decoration: BoxDecoration(
                 color: Color(0xffe3c2c2),
@@ -396,7 +409,9 @@ class OrderHistoryScreen extends StatelessWidget {
         ),
         if (description.isNotEmpty)
           TextButton(
-            onPressed: () {},
+            onPressed: () {}, style: TextButton.styleFrom(
+            overlayColor: Colors.transparent,
+          ),
             child:
             Text('See Details', style: TextStyle(color: Color(0xffe34126))),
           ),

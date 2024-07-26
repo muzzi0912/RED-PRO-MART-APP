@@ -165,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       suffixIcon: GestureDetector(
                         onTap: _togglePasswordVisibility,
                         child: Icon(
-                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: _obscurePassword ? Colors.grey : Constants.mainAppColor,
                         ),
                       ),
@@ -185,7 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) => ForgetScreen()));
                             },
                             style: TextButton.styleFrom(
-                              overlayColor: Colors.transparent,
+                              overlayColor: Colors.transparent
+                              ,
                             ),
                             child: Text(
                               'Forgot Password ?',

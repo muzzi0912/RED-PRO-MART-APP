@@ -38,12 +38,12 @@ class TrackingDetailScreen extends StatelessWidget {
             width: screenWidth * 0.09,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(CupertinoIcons.bag),
+        //     onPressed: () {},
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Column(

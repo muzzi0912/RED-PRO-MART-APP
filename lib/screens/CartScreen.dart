@@ -49,15 +49,13 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'My Cart',
-            style: GoogleFonts.poppins(
-              fontSize: 24,
-              color: Colors.black,
-            ),
+        title: Text(
+          'My Cart',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            color: Colors.black,
           ),
-        ),
+        ),centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
@@ -76,45 +74,45 @@ class _CartScreenState extends State<CartScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                icon: Icon(CupertinoIcons.bag),
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  overlayColor: Colors.transparent,
-                ),
-              ),
-              if (totalItemCount > 0)
-                Positioned(
-                  right: 5,
-                  top: 3,
-                  child: Container(
-                    padding: EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 18,
-                      minHeight: 18,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '$totalItemCount',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ],
+        // actions: [
+        //   Stack(
+        //     children: [
+        //       IconButton(
+        //         icon: Icon(CupertinoIcons.bag),
+        //         onPressed: () {},
+        //         style: TextButton.styleFrom(
+        //           overlayColor: Colors.transparent,
+        //         ),
+        //       ),
+        //       if (totalItemCount > 0)
+        //         Positioned(
+        //           right: 5,
+        //           top: 3,
+        //           child: Container(
+        //             padding: EdgeInsets.all(1),
+        //             decoration: BoxDecoration(
+        //               color: Colors.red,
+        //               borderRadius: BorderRadius.circular(10),
+        //             ),
+        //             constraints: BoxConstraints(
+        //               minWidth: 18,
+        //               minHeight: 18,
+        //             ),
+        //             child: Center(
+        //               child: Text(
+        //                 '$totalItemCount',
+        //                 style: TextStyle(
+        //                   color: Colors.white,
+        //                   fontSize: 12,
+        //                 ),
+        //                 textAlign: TextAlign.center,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //     ],
+        //   ),
+       // ],
       ),
       body: Column(
         children: [

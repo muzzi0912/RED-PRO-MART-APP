@@ -6,6 +6,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:redpro_mart/AuthScreens/ForgetScreen.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Controllers/SignupController.dart';
 import '../utils/constants.dart';
@@ -241,11 +242,11 @@ class CreateAccountScreen extends StatelessWidget {
                                         .togglePasswordVisibility,
                                     child: Icon(
                                       _authController.obscurePassword.value
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
                                       color: _authController.obscurePassword.value
-                                          ? Constants.mainAppColor
-                                          : Colors.grey,
+                                          ? Colors.grey
+                                          : Constants.mainAppColor
                                     ),
                                   ),
                                 ),
@@ -307,7 +308,7 @@ class CreateAccountScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginScreen(),
+                                    builder: (context) => ForgetScreen(),
                                   ),
                                 );
                               },

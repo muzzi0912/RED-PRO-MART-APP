@@ -74,30 +74,32 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xFF970000),
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProductDetailScreen()),
-            );
-          },   style: TextButton.styleFrom(
-          overlayColor: Colors.transparent,
-        ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag,color: Colors.white,),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
+        leading:   GestureDetector(
+          onTap: () {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => HomeScreen()),
+            // );
+          },
+          child: Image.asset(
+            'assets/backButton.png', // Replace with your back button image path
+            height: 30,
+            width: 30,
           ),
-          ),
-        ],
+        ),
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(CupertinoIcons.bag,color: Colors.white,),
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => CartScreen()),
+        //       );
+        //     },   style: TextButton.styleFrom(
+        //     overlayColor: Colors.transparent,
+        //   ),
+        //   ),
+        // ],
       ),
       body: Stack(
         children: [
@@ -208,8 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: TextField(
-                          cursorColor: Colors.black,
+                        child: TextField(  enableInteractiveSelection: false,
+                          keyboardType: TextInputType.text,
+                          cursorColor: Constants.mainAppColor,
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             hintText: "Search...",
@@ -303,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             MaterialPageRoute(builder: (context) => CategoryScreen()),
                           );
                         },   style: TextButton.styleFrom(
-                        overlayColor: Colors.transparent,
+                        overlayColor: Colors.orange,
                       ),
                         child: Padding(
                           padding: const EdgeInsets.only(left:20,),
@@ -398,7 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(builder: (context) => ProductListingScreen()),
                               );
                             },   style: TextButton.styleFrom(
-                            overlayColor: Colors.transparent,
+                            overlayColor: Colors.orange,
                           ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -423,26 +426,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen()),
+                    );
 
-                Container(
-                  height: 240,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: WidgetProductCard.ProductCard(
-                          imagePath: 'assets/download.png',
-                          title: 'Grapes: Yellow Plantai',
-                          subtitle: 'Approx:lb',
-                          rating: 4.5,
-                          price: 2.99,
-                        ),
-                      );
-                    },
+                  },
+                  child: Container(
+                    height: 240,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: WidgetProductCard.ProductCard(
+                            imagePath: 'assets/download.png',
+                            title: 'Grapes: Yellow Plantain',
+                            subtitle: 'Approx: lb',
+                            rating: 4.5,
+                            price: 2.99,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
@@ -469,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder: (context) => FeaturedDealsScreen()),
                           );
                         },   style: TextButton.styleFrom(
-                        overlayColor: Colors.transparent,
+                        overlayColor: Colors.orange,
                       ),
                         child: Row(
                           children: [
@@ -491,23 +504,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   ),
                 ),
-                Container(
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Featureddealwidget(
-                          imagePath: 'assets/BananaCards.png',
-                          title: 'Banana: Yellow Plantai',
-                          subtitle: 'Approx.40lb',
-                          price: 2.99,
-                          rating: 4,
-                        ),
-                      );
-                    },
+                GestureDetector(onTap:(){ Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductDetailScreen()),
+                );},
+                  child: Container(
+                    height: 250,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Featureddealwidget(
+                            imagePath: 'assets/BananaCards.png',
+                            title: 'Banana: Yellow Plantai',
+                            subtitle: 'Approx.40lb',
+                            price: 2.99,
+                            rating: 4,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Padding(
@@ -532,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder: (context) => Recommendations()),
                           );
                         },   style: TextButton.styleFrom(
-                        overlayColor: Colors.transparent,
+                        overlayColor: Colors.orange,
                       ),
 
                         child: Row(mainAxisAlignment: MainAxisAlignment.end,
@@ -557,23 +576,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                Container(
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Featureddealwidget(
-                          imagePath: 'assets/BananaCards.png',
-                          title: 'Banana: Yellow Plantai',
-                          subtitle: 'Approx.40lb',
-                          price: 2.99,
-                          rating: 4,
-                        ),
-                      );
-                    },
+                GestureDetector(onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductDetailScreen()),
+                  );
+                },
+                  child: Container(
+                    height: 250,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Featureddealwidget(
+                            imagePath: 'assets/BananaCards.png',
+                            title: 'Banana: Yellow Plantai',
+                            subtitle: 'Approx.40lb',
+                            price: 2.99,
+                            rating: 4,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30,)

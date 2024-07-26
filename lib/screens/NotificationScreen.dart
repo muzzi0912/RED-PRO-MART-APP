@@ -41,8 +41,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text('Notification', style: GoogleFonts.poppins()),
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
@@ -124,7 +126,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
                 time: '1hr',
                 context: context,
-              ),buildNotificationItem(
+              ),
+              buildNotificationItem(
                 icon: Icons.account_balance_wallet_outlined,
                 title: 'New PayPal Added',
                 description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -173,39 +176,44 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required String time,
     required BuildContext context,
   }) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.red.shade100,
-            child: Icon(icon, color: Color(0xffe34126), size: 30),
-          ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.04),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                    Text(
-                      time,
-                      style: GoogleFonts.poppins(color: Colors.grey, fontSize: 12),
-                    ),
-                  ],
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-                Text(description, style: GoogleFonts.poppins(color: Colors.grey)),
-              ],
+    return InkWell(
+      onTap: () {
+        // Implement tap action here
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.red.shade100,
+              child: Icon(icon, color: Color(0xffe34126), size: 30),
             ),
-          ),
-        ],
+            SizedBox(width: MediaQuery.of(context).size.width * 0.04),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                      Text(
+                        time,
+                        style: GoogleFonts.poppins(color: Colors.grey, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+                  Text(description, style: GoogleFonts.poppins(color: Colors.grey)),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

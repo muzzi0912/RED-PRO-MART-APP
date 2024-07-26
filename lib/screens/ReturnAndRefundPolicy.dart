@@ -61,15 +61,7 @@ class _ReturnandrefundpolicyState extends State<Returnandrefundpolicy> {
             width: 40,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -115,6 +107,43 @@ class _ReturnandrefundpolicyState extends State<Returnandrefundpolicy> {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
                       'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
                       'ultricies leo. Curabitur vehicula odio id suscipit aliquet.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet. '
+                      'Vestibulum ante ipsum primis in faucibus orci luctus et '
+                      'ultrices posuere cubilia curae; Integer nec ex eu sapien '
+                      'pellentesque ultricies. Donec euismod magna nec turpis '
+                      'volutpat, sit amet ullamcorper magna blandit.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),   SizedBox(height: 10),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet. '
+                      'Vestibulum ante ipsum primis in faucibus orci luctus et '
+                      'ultrices posuere cubilia curae; Integer nec ex eu sapien '
+                      'pellentesque ultricies. Donec euismod magna nec turpis '
+                      'volutpat, sit amet ullamcorper magna blandit.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                  ),
+                ),   SizedBox(height: 10),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                      'Pellentesque ut quam tincidunt, vulputate dolor sit amet, '
+                      'ultricies leo. Curabitur vehicula odio id suscipit aliquet. '
+                      'Vestibulum ante ipsum primis in faucibus orci luctus et '
+                      'ultrices posuere cubilia curae; Integer nec ex eu sapien '
+                      'pellentesque ultricies. Donec euismod magna nec turpis '
+                      'volutpat, sit amet ullamcorper magna blandit.',
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                   ),

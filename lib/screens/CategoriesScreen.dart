@@ -78,14 +78,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
     List<String> choices = ["All", "Fruits", "Vegetables", "Deals", "New"];
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,
-title: Text(
-  'Categories',
-  style: GoogleFonts.poppins(fontSize: 24),
-),centerTitle: true,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          'Categories',
+          style: GoogleFonts.poppins(fontSize: 24),
+        ),
+        centerTitle: true,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        leading:  GestureDetector(
+        leading: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
@@ -101,9 +103,10 @@ title: Text(
         actions: [
           IconButton(
             icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
-          ),
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              overlayColor: Colors.transparent,
+            ),
           ),
         ],
       ),
@@ -115,13 +118,12 @@ title: Text(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
-
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    cursorColor: Colors.black,
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.text,
+                    cursorColor: Constants.textColor,
                     decoration: InputDecoration(
                       hintText: 'Search here',
                       suffixIcon: Icon(Icons.search),
@@ -210,7 +212,6 @@ title: Text(
                         ),
                       ),
                     ),
-
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8), // Adjusted padding here
                       child: ClipRRect(
@@ -221,7 +222,6 @@ title: Text(
                         ),
                       ),
                     ),
-
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8), // Adjusted padding here
                       child: ClipRRect(
@@ -234,31 +234,49 @@ title: Text(
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                GridView.builder(
+                SizedBox(height: 10),
+                ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10, // Adjust vertical spacing
-                    crossAxisSpacing: 10, // Adjust horizontal spacing
-                    childAspectRatio: 0.75, // Adjust aspect ratio as needed
-                  ),
-                  itemCount: 10, // Adjust the number of items
+                  itemCount: 5, // Adjust the number of rows
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0), // Add padding around each item
-                      child: ProductCardDuplicate(
-                        imagePath: 'assets/Rectangle 12.png', // Replace with your image path
-                        title: 'Bananas: Yellow Plantai',
-                        subtitle: 'Approx 70lb',
-                        rating: 4.5, // Example rating
-                        price: 20.0, // Example price
-                      ),
+                    return Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: ProductCardDuplicate(
+                                  imagePath: 'assets/Rectangle 12.png', // Replace with your image path
+                                  title: 'Bananas: Yellow Plantain',
+                                  subtitle: 'Approx 70lb',
+                                  rating: 4.5, // Example rating
+                                  price: 20.0, // Example price
+                                ),
+                              ),
+                            ),
+                            SizedBox(width:10 ), // Adjust horizontal spacing
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: ProductCardDuplicate(
+                                  imagePath: 'assets/Rectangle 12.png', // Replace with your image path
+                                  title: 'Bananas: Yellow Plantain',
+                                  subtitle: 'Approx 70lb',
+                                  rating: 4.5, // Example rating
+                                  price: 20.0, // Example price
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                       // Adjust vertical spacing
+                      ],
                     );
                   },
                 ),
-
               ],
             ),
           ),

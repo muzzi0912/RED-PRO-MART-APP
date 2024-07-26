@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:redpro_mart/AuthScreens/SignupScreen.dart';
+import 'package:redpro_mart/screens/SplashScreen.dart';
 import 'package:redpro_mart/screens/WelcomeScreen.dart';
 import 'package:redpro_mart/utils/constants.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  WelcomeScreen()
+      home:  SplashScreen()
     );
   }
 }

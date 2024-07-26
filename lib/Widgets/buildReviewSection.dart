@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
+
 Widget buildReviewSection(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -10,7 +12,7 @@ Widget buildReviewSection(BuildContext context) {
         style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.03),
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-      TextField(cursorColor: Colors.black,
+      TextField(cursorColor:Constants.mainAppColor,
         maxLines: 4,
         decoration: InputDecoration(
 

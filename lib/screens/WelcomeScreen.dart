@@ -152,7 +152,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   MaterialPageRoute(builder: (context) => HomeScreen()));
             },
             style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
+              overlayColor: Colors.orange,
             ),
             child: Text(
               'Skip',

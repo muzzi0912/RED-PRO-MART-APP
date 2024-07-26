@@ -19,6 +19,7 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int _selectedPaymentIndex = 0; // Track selected payment method index
   String _selectedShippingOption = 'Standard'; // Track selected shipping option
+  bool _showAllShippingOptions = false; // Add this state variable
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +47,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+
       ),
       body: Column(
         children: [
@@ -75,8 +68,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       buildSectionTitle('Select Shipping'),
                       Align(
                         alignment: Alignment.centerRight,
+
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (!_showAllShippingOptions);
+                            setState(() {
+                              _showAllShippingOptions = true; // Show all options
+                            });
+                          },
                           child: Text(
                             'See all options',
                             style: GoogleFonts.poppins(color: Color(0xffe34126)),
@@ -88,14 +87,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   buildShippingOptions(),
                   Divider(height: 38),
                   buildSubtotal(),
-                  SizedBox(height: 16),
+                  Divider(),
+                  SizedBox(height: 10),
                   buildSectionTitle('Additional Charges'),
-                  SizedBox(height: 8),
+                  SizedBox(height: 5),
                   buildAdditionalCharges(),
+                  Divider(),
                   SizedBox(height: 16),
+
                   buildSectionTitle('Payment Method'),
                   buildPaymentMethods(),
-                  Divider(height: 60),
+
                 ],
               ),
             ),
@@ -142,9 +144,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget buildShippingOptions() {
     return Column(
       children: [
-        shippingOption('Standard', 'Delivery in 5-7 business days', 5.99),
-        shippingOption('Express', 'Delivery in 2-3 business days', 12.99, isSelected: _selectedShippingOption == 'Express'),
-        shippingOption('Next Day', 'Next business day delivery', 24.99),
+        if (!_showAllShippingOptions || _selectedShippingOption == 'Standard') // Show only Standard initially or when selected
+          shippingOption('Standard', 'Delivery in 5-7 business days', 5.99, isSelected: _selectedShippingOption == 'Standard'),
+        if (_showAllShippingOptions) ...[
+          shippingOption('Express', 'Delivery in 2-3 business days', 12.99, isSelected: _selectedShippingOption == 'Express'),
+          shippingOption('Next Day', 'Next business day delivery', 24.99),
+        ],
+
       ],
     );
   }
@@ -152,21 +158,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget shippingOption(String title, String description, double price, {bool isSelected = false}) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.only(bottom: 10.0),
+      padding: EdgeInsets.all(8.0), // Reduced padding
+      margin: EdgeInsets.only(bottom: 8.0), // Reduced margin
       decoration: BoxDecoration(
         border: Border.all(
-          color: isSelected ? Color(0xffe34126) : Colors.grey,
-          width: 2,
+          color: isSelected ? Color(0xffe34126) :  Colors.grey.shade300,
+
         ),
+
         borderRadius: BorderRadius.circular(8),
         color: Colors.white,
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
-        subtitle: Text(description, style: GoogleFonts.poppins(color: Colors.grey)),
-        trailing: Text('\$${price.toStringAsFixed(2)}', style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+        // Adjusted padding
+        title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)), // Adjusted font size
+        subtitle: Text(description, style: GoogleFonts.poppins(color: Colors.grey, fontSize: 12)), // Adjusted font size
+        trailing: Text('\$${price.toStringAsFixed(2)}', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)), // Adjusted font size
         onTap: () {
           setState(() {
             _selectedShippingOption = title;
@@ -175,6 +182,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
     );
   }
+
 
   Widget buildAdditionalCharges() {
     return Column(
@@ -192,11 +200,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold)),
-        Text(value, style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(label, style: GoogleFonts.poppins(fontSize: 12, )), // Adjusted font size
+        Text(value, style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.bold)), // Adjusted font size
       ],
     );
   }
+
 
   Widget buildPaymentMethods() {
     return SingleChildScrollView(

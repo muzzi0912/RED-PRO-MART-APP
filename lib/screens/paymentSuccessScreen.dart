@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:redpro_mart/screens/CheckoutScreen.dart';
+import 'package:fluttertoast/fluttertoast.dart'; // Import FlutterToast
 import 'dart:ui'; // For BackdropFilter
 
 import 'ShippingScreen.dart';
@@ -27,6 +27,18 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
     setState(() {
       _isEReceiptVisible = false;
     });
+  }
+
+  void _showToast() {
+    Fluttertoast.showToast(
+      msg: "The receipt has been saved to your gallery.",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
 
   @override
@@ -58,15 +70,15 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
             Navigator.pop(context); // Close the current screen
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(CupertinoIcons.bag),
+        //     onPressed: () {},
+        //     style: TextButton.styleFrom(
+        //       overlayColor: Colors.transparent,
+        //     ),
+        //   ),
+        // ],
       ),
       body: Stack(
         children: [
@@ -114,8 +126,9 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                         backgroundColor: Color(0xFFED4226),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
-                        ),
+                        ), disabledForegroundColor: Colors.transparent.withOpacity(0.38), disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
                         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
+                        elevation: 0, // Remove overlay effect
                       ),
                       child: Text(
                         'View Order',
@@ -127,11 +140,14 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                     ),
                     TextButton(
                       onPressed: _showEReceipt,
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.grey, // Text color
+                        overlayColor: Colors.transparent, // Remove overlay effect
+                      ),
                       child: Text(
                         'View E-Receipt',
                         style: TextStyle(
                           fontSize: height * 0.02,
-                          color: Colors.grey,
                         ),
                       ),
                     ),
@@ -166,7 +182,6 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                               onPressed: _hideEReceipt,
                             ),
                           ),
-
                           Text(
                             'TID # 12345678985',
                             style: TextStyle(
@@ -197,7 +212,9 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                               TextButton(
                                 onPressed: () {
                                   // Share functionality here
-                                },
+                                },     style: TextButton.styleFrom(
+                                overlayColor: Colors.transparent,
+                              ),
                                 child: Text(
                                   'Share',
                                   style: TextStyle(color: Colors.black),
@@ -205,8 +222,10 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  // Save functionality here
-                                },
+                                  _showToast(); // Show toast message
+                                },     style: TextButton.styleFrom(
+                                overlayColor: Colors.transparent,
+                              ),
                                 child: Text(
                                   'Save',
                                   style: TextStyle(color: Colors.black),

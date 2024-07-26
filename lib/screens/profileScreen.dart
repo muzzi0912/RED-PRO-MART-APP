@@ -270,7 +270,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          //  backgroundImage: AssetImage('assets/images/profile_picture.png'),
+                           backgroundImage: AssetImage('assets/ceo_image.png'),
                         ),
                         SizedBox(width: 16),
                         Text(
@@ -286,7 +286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           children: [
                             Text(
-                              '0',
+                              '6',
                               style: GoogleFonts.poppins(color: Colors.white),
                             ),
                             Text(
@@ -298,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           children: [
                             Text(
-                              '0',
+                              '10',
                               style: GoogleFonts.poppins(color: Colors.white),
                             ),
                             Text(
@@ -370,7 +370,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _createDrawerItem({required String imagePath, required String text, required VoidCallback onTap}) {
     return ListTile(
-      leading: Image.asset(imagePath, width: 24, height: 24),
+      leading: Image.asset(imagePath, width: 24, height: 24,color: Constants.mainAppColor,),
       title: Text(text, style: GoogleFonts.poppins(color: Colors.black)),
       onTap: onTap,
     );

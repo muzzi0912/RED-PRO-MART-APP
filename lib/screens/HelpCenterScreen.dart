@@ -16,11 +16,12 @@ class _ChatSupportState extends State<ChatSupport> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 1,
-        leading:  GestureDetector(
+        elevation: 0,
+        leading: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
@@ -35,42 +36,26 @@ class _ChatSupportState extends State<ChatSupport> {
         ),
         title: Row(
           children: [
-            CircleAvatar(
-              //backgroundImage: AssetImage('assets/group_avatar.png'), // Replace with your asset
+            CircleAvatar(backgroundColor: Colors.grey,
+               backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
             ),
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Help Center',
+                  'John Doe',
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: width * 0.045,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  '8 members, 5 online',
-                  style: GoogleFonts.poppins(
-                    color: Colors.grey,
-                    fontSize: width * 0.033,
-                  ),
-                ),
               ],
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.phone, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(CupertinoIcons.video_camera, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
+
       ),
       body: Column(
         children: [
@@ -80,20 +65,14 @@ class _ChatSupportState extends State<ChatSupport> {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      //backgroundImage: AssetImage('assets/user_avatar.png'), // Replace with your asset
+                    CircleAvatar(backgroundColor: Colors.grey,
+                       backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
                     ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Hafizur Rahman',
-                          style: GoogleFonts.poppins(
-                            fontSize: width * 0.04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+
                         Container(
                           margin: EdgeInsets.only(top: 4),
                           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -116,7 +95,62 @@ class _ChatSupportState extends State<ChatSupport> {
                             color: Colors.grey,
                           ),
                         ),
+                        Text(
+                          'John Doe',
+                          style: GoogleFonts.poppins(
+                            fontSize: width * 0.04,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                // User message
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+
+                        Container(
+                          margin: EdgeInsets.only(top: 4),
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            'Hello! I need help!',
+                            style: GoogleFonts.poppins(
+                              fontSize: width * 0.035,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+
+                        Text(
+                          '09:27 AM',
+                          style: GoogleFonts.poppins(
+                            fontSize: width * 0.03,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          'You',
+                          style: GoogleFonts.poppins(
+                            fontSize: width * 0.04,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                      ],
+                    ),
+                    SizedBox(width: 10),
+                    CircleAvatar(backgroundColor: Colors.grey,
+                      backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
                     ),
                   ],
                 ),
@@ -128,8 +162,11 @@ class _ChatSupportState extends State<ChatSupport> {
             color: Colors.white,
             child: Row(
               children: [
+                Icon(CupertinoIcons.paperplane, color: Colors.grey),
+                SizedBox(width: 10),
                 Expanded(
-                  child: TextField(cursorColor: Constants.mainAppColor,
+                  child: TextField(
+                    cursorColor: Constants.mainAppColor,
                     decoration: InputDecoration(
                       hintText: 'Write your message',
                       hintStyle: GoogleFonts.poppins(
@@ -147,14 +184,13 @@ class _ChatSupportState extends State<ChatSupport> {
                   ),
                 ),
                 SizedBox(width: 10),
-                Icon(CupertinoIcons.paperplane, color: Colors.grey),
-                SizedBox(width: 10),
                 Icon(CupertinoIcons.photo, color: Colors.grey),
-                SizedBox(width: 10),
-                Icon(CupertinoIcons.mic, color: Colors.grey),
+
+
               ],
             ),
           ),
+          SizedBox(height: 10),
         ],
       ),
     );

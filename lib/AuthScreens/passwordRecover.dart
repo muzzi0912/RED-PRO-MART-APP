@@ -183,7 +183,7 @@ class _PasswordRecoverState extends State<PasswordRecover> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EnterCodePass()),
+                                builder: (context) => SetupNewPassword()),
                           );
                           // Handle login logic
                           // Handle Next action
@@ -219,7 +219,7 @@ class _PasswordRecoverState extends State<PasswordRecover> {
                           // Handle cancel logic
                         },
                         style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
+                          overlayColor: Colors.orange,
                         ),
                         child: Text(
                           'Cancel',

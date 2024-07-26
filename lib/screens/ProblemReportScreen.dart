@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 
 class ProblemReportScreen extends StatefulWidget {
@@ -10,21 +13,25 @@ class ProblemReportScreen extends StatefulWidget {
 
 class _ProblemReportScreenState extends State<ProblemReportScreen> {
   String selectedProblem = '';
+  final ImagePicker _picker = ImagePicker();
+  List<XFile>? _selectedImages = [];
 
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(backgroundColor: Colors.white,
-      appBar: AppBar( backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         scrolledUnderElevation: 0.0,
         title: Text(
           'Tell us the Problem',
           style: GoogleFonts.poppins(),
         ),
-        leading:  GestureDetector(
+        leading: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
@@ -95,17 +102,42 @@ class _ProblemReportScreenState extends State<ProblemReportScreen> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
-              Container(
-                height: screenHeight * 0.13,
-                width: screenHeight * 0.13,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Center(
-                  child: Icon(Icons.add, size: 40, color: Colors.grey),
+              GestureDetector(
+                onTap: () async {
+                  final List<XFile>? images = await _picker.pickMultiImage();
+                  if (images != null && images.isNotEmpty) {
+                    setState(() {
+                      _selectedImages = images;
+                    });
+                  }
+                },
+                child: Container(
+                  height: screenHeight * 0.13,
+                  width: screenHeight * 0.13,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Center(
+                    child: Icon(Icons.add, size: 40, color: Colors.grey),
+                  ),
                 ),
               ),
+              SizedBox(height: screenHeight * 0.02),
+              _selectedImages != null && _selectedImages!.isNotEmpty
+                  ? Wrap(
+                spacing: 8.0,
+                runSpacing: 8.0,
+                children: _selectedImages!.map((image) {
+                  return Image.file(
+                    File(image.path),
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  );
+                }).toList(),
+              )
+                  : Container(),
               SizedBox(height: screenHeight * 0.04),
               Text(
                 'Email Address (Optional)',

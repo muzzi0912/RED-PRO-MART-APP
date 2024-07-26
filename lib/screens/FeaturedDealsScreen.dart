@@ -61,19 +61,7 @@ class _FeaturedDealsScreenState extends State<FeaturedDealsScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag,color: Colors.black,),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },   style: TextButton.styleFrom(
-            overlayColor: Colors.transparent,
-          ),
-          ),
-        ],
+
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -149,7 +137,7 @@ class _FeaturedDealsScreenState extends State<FeaturedDealsScreen> {
                           ),
                         ],
                       ),
-                     const SizedBox(height: 30),
+                     const SizedBox(height: 10),
                       // Add spacing between rows
                     ],
                   );

@@ -58,14 +58,7 @@ title: Text(
               width: 30,
             ),
           ),
-          actions: [
-            IconButton(
-              icon: Icon(CupertinoIcons.bag),
-              onPressed: () {},   style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-            ),
-          ],
+
           bottom: TabBar(
             labelColor: Color(0xffe34126),
             unselectedLabelColor: Colors.grey,
@@ -115,13 +108,13 @@ title: Text(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 'assets/ApplesBanner.png',
-                height: 100,
-                width: 100,
+                height: 70,
+                width: 70,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 13),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +139,7 @@ title: Text(
                 MaterialPageRoute(builder: (context) => TrackingDetailScreen()));},
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xffe34126),
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -182,17 +175,17 @@ title: Text(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 'assets/ApplesBanner.png',
-                height: 100,
-                width: 100,
+                height: 70,
+                width: 70,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: [   SizedBox(height: 12),
                 Text(
                   'Red Gala Apple',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -206,7 +199,7 @@ title: Text(
               ],
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 13),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -216,7 +209,7 @@ title: Text(
             style: ElevatedButton.styleFrom(
               minimumSize: Size(80, 10),
               backgroundColor: Color(0xffe34126),
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -252,13 +245,13 @@ title: Text(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 'assets/ApplesBanner.png',
-                height: 100,
-                width: 100,
+                height: 70,
+                width: 70,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 13),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -132,7 +132,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                             // Handle cancel logic
                           },
                           style: TextButton.styleFrom(
-                            overlayColor: Colors.transparent,
+                            overlayColor: Colors.orange,
                           ),
                           child: Text(
                             'Cancel',

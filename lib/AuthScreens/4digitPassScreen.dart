@@ -136,7 +136,7 @@ class _EnterCodePassState extends State<EnterCodePass> {
                       // Handle cancel logic
                     },
                     style: TextButton.styleFrom(
-                      overlayColor: Colors.transparent,
+                      overlayColor: Colors.orange,
                     ),
                     child: Text(
                       'Send again',

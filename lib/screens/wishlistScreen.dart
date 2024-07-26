@@ -73,112 +73,122 @@ class _WishlistScreenState extends State<WishlistScreen> {
           width: 30,
         ),
       ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()));},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
 
-                SizedBox(height: 20),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Shop by:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+            SizedBox(height: 20),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left:10.0),
+                  child: Text(
+                    'Shop by:  ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(choices.length, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: ChipTheme(
-                                data: ChipThemeData(
-                                  showCheckmark: false,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                ),
-                                child: ChoiceChip(
-                                  label: Text(choices[index]),
-                                  selected: _selectedChoiceIndex == index,
-                                  onSelected: (bool selected) {
-                                    _onChoiceSelected(index);
-                                  },
-                                  selectedColor: Colors.white,
-                                  backgroundColor: Colors.white,
-                                  side: BorderSide(
-                                    color: _selectedChoiceIndex == index
-                                        ? Colors.grey
-                                        : Colors.grey,
-                                  ),
-                                  avatar: _selectedChoiceIndex == index
-                                      ? Image.asset(
-                                    'assets/Vector.png',
-                                    height: 25,
-                                    width: 25,
-                                  ) // Replace with your star image path
-                                      : null,
-                                  labelStyle: TextStyle(
-                                    color: _selectedChoiceIndex == index
-                                        ? Colors.deepOrange
-                                        : Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.75,
                   ),
-                  itemCount: 10, // Adjust the number of items
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ProductCardDuplicate(
-                        imagePath: 'assets/Rectangle 12.png', // Replace with your image path
-                        title: 'Bananas: Yellow Plantai',
-                        subtitle: 'Approx 70lb',
-                        rating: 4.5, // Example rating
-                        price: 20.0, // Example price
-                      ),
-                    );
-                  },
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(choices.length, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: ChipTheme(
+                            data: ChipThemeData(
+                              showCheckmark: false,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
+                            child: ChoiceChip(
+                              label: Text(choices[index]),
+                              selected: _selectedChoiceIndex == index,
+                              onSelected: (bool selected) {
+                                _onChoiceSelected(index);
+                              },
+                              selectedColor: Colors.white,
+                              backgroundColor: Colors.white,
+                              side: BorderSide(
+                                color: _selectedChoiceIndex == index
+                                    ? Colors.grey
+                                    : Colors.grey,
+                              ),
+                              avatar: _selectedChoiceIndex == index
+                                  ? Image.asset(
+                                'assets/Vector.png',
+                                height: 25,
+                                width: 25,
+                              ) // Replace with your star image path
+                                  : null,
+                              labelStyle: TextStyle(
+                                color: _selectedChoiceIndex == index
+                                    ? Colors.deepOrange
+                                    : Colors.grey,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: ProductCardDuplicate(
+                                imagePath: index % 2 == 0
+                                    ? 'assets/grapes12.png'
+                                    : 'assets/BananaCards.png',
+                                title: index % 2 == 0 ? 'Grapes' : 'Bananas',
+                                subtitle: index % 2 == 0 ? 'Approx. 40lb' : 'Approx. 1lb',
+                                rating: index % 2 == 0 ? 4.5 : 4.2,
+                                price: index % 2 == 0 ? 2.99 : 0.99,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: ProductCardDuplicate(
+                                imagePath: index % 2 == 0
+                                    ? 'assets/BananaCards.png'
+                                    : 'assets/grapes12.png',
+                                title: index % 2 == 0 ? 'Bananas' : 'Grapes',
+                                subtitle: index % 2 == 0 ? 'Approx. 1lb' : 'Approx. 40lb',
+                                rating: index % 2 == 0 ? 4.2 : 4.5,
+                                price: index % 2 == 0 ? 0.99 : 2.99,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: PersistentBottomNavBar(

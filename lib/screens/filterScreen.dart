@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../utils/constants.dart';
+
 class FilterScreen extends StatefulWidget {
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -45,7 +47,7 @@ class _FilterScreenState extends State<FilterScreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(screenWidth * 0.05),
+              padding: EdgeInsets.only(left: 13),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -61,7 +63,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: Wrap(
                       spacing: 8.0,
                       children: _buildChips(
-                          ['All', 'Apple', 'Banana', 'Papaya', 'Mango'], 'fruit'),
+                          ['All', 'Apple', 'Banana', 'Papaya', 'Mango','Apple', 'Banana', 'Papaya', 'Mango'], 'fruit'),
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.04),
@@ -75,9 +77,9 @@ class _FilterScreenState extends State<FilterScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Wrap(
-                      spacing: 8.0,
+                      spacing: 15.0,
                       children: _buildChips(
-                          ['All', 'Tomato', 'Potato', 'Chili', 'Mint'], 'vegetable'),
+                          ['All', 'Tomato', 'Potato', 'Chili', 'Mint','Potato', 'Chili', 'Mint'], 'vegetable'),
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.04),
@@ -123,13 +125,19 @@ class _FilterScreenState extends State<FilterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Min: ${_currentRangeValues.start.round()}',
-                        style: GoogleFonts.poppins(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          'Min: ${_currentRangeValues.start.round()}',
+                          style: GoogleFonts.poppins(),
+                        ),
                       ),
-                      Text(
-                        'Max: ${_currentRangeValues.end.round()}',
-                        style: GoogleFonts.poppins(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15.0),
+                        child: Text(
+                          'Max: ${_currentRangeValues.end.round()}',
+                          style: GoogleFonts.poppins(),
+                        ),
                       ),
                     ],
                   ),
@@ -173,20 +181,15 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // Apply filter logic
-                    },
-                    child: Text(
-                      'Apply',
-                      style: GoogleFonts.poppins(),
-                    ),
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color(0xFFED4226),
+                      backgroundColor: Color(0xffe34126),
+                      padding: EdgeInsets.symmetric(vertical: 9, horizontal: 45), // Adjust padding for button size
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
+                    child: Text('Apply', style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:redpro_mart/screens/searchScreen.dart';
+import 'package:redpro_mart/screens/wishlistScreen.dart';
+
+import '../screens/CartScreen.dart';
+import '../screens/HomeScreen.dart';
+import '../screens/profileScreen.dart';
 
 class PersistentBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -25,13 +31,19 @@ class _PersistentBottomNavBarState extends State<PersistentBottomNavBar> {
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white,
       currentIndex: widget.selectedIndex.clamp(0, _imagePaths.length - 1),
-      onTap: (_) {},
+      onTap: (index) {
+        if (index >= 0 && index < _imagePaths.length) {
+          widget.onItemTapped(index);
+          _navigateToScreen(index, context);
+        }
+      },
       items: List.generate(_imagePaths.length, (index) {
         return BottomNavigationBarItem(
           icon: InkWell(
             onTap: () {
               if (index >= 0 && index < _imagePaths.length) {
                 widget.onItemTapped(index);
+                _navigateToScreen(index, context);
               }
             },
             highlightColor: Colors.transparent,
@@ -47,6 +59,37 @@ class _PersistentBottomNavBarState extends State<PersistentBottomNavBar> {
       }),
       showSelectedLabels: false,
       showUnselectedLabels: false,
+    );
+  }
+
+  void _navigateToScreen(int index, BuildContext context) {
+    Widget newScreen;
+    switch (index) {
+      case 0:
+        newScreen = HomeScreen();
+        break;
+      case 1:
+        newScreen = SearchScreen();
+        break;
+      case 2:
+        newScreen = CartScreen();
+        break;
+      case 3:
+        newScreen = WishlistScreen();
+        break;
+      case 4:
+        newScreen = ProfileScreen();
+        break;
+      default:
+        newScreen = HomeScreen();
+    }
+
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => newScreen,
+        transitionDuration: Duration.zero,
+      ),
     );
   }
 }

@@ -60,12 +60,6 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -81,28 +75,51 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
               buildContactItem(
                 icon: Icons.headset_mic,
                 title: 'Customer Service',
-                children: [],
+                children: [
+                  Divider(),
+                  ListTile(
+                    title: Text('Phone: +1 234 567 890', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                  ListTile(
+                    title: Text('Email: support@example.com', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                ],
                 index: 0,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.language,
                 title: 'Website',
-                children: [],
+                children: [
+                  Divider(),
+                  ListTile(
+                    title: Text('Visit our website: www.example.com', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                ],
                 index: 1,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.facebook,
                 title: 'Facebook',
-                children: [],
+                children: [
+                  Divider(),
+                  ListTile(
+                    title: Text('Follow us on Facebook: www.facebook.com/example', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                ],
                 index: 2,
               ),
               SizedBox(height: 10),
               buildContactItem(
                 icon: Icons.messenger_outline,
                 title: 'Twitter',
-                children: [],
+                children: [
+                  Divider(),
+                  ListTile(
+                    title: Text('Follow us on Twitter: www.twitter.com/example', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                ],
                 index: 3,
               ),
               SizedBox(height: 10),
@@ -129,7 +146,14 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
               buildContactItem(
                 icon: Icons.help_outline,
                 title: 'FAQ\'s',
-                children: [],
+                children: [
+                  ListTile(
+                    title: Text('How can I contact support?', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                  ListTile(
+                    title: Text('What is your return policy?', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  ),
+                ],
                 index: 5,
               ),
               SizedBox(height: 10),
@@ -200,22 +224,32 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
           _expandedIndex = _expandedIndex == index ? -1 : index; // Toggle expansion
         });
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
         padding: EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(10)),
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(
           children: [
             ListTile(
               leading: Icon(icon, color: Colors.grey),
               title: Text(title),
-            ),
-            Visibility(
-              visible: _expandedIndex == index,
-              child: Column(
-                children: children,
+              trailing: Icon(
+                _expandedIndex == index
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: Colors.grey,
               ),
+            ),
+            AnimatedCrossFade(
+              firstChild: Container(),
+              secondChild: Column(children: children),
+              crossFadeState: _expandedIndex == index
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              duration: Duration(milliseconds: 300),
             ),
           ],
         ),
@@ -223,5 +257,3 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
     );
   }
 }
-
-
