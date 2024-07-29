@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/screens/ProductDetailScreen.dart';
 import 'package:redpro_mart/screens/ShippingScreen.dart';
+import 'package:redpro_mart/screens/searchScreen.dart';
 
 import '../Widgets/favBtn.dart';
 import '../utils/constants.dart';
@@ -64,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductDetailScreen(),
+                builder: (context) => SearchScreen(),
               ),
             );
           },

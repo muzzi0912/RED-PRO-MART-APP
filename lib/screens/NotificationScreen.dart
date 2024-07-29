@@ -53,7 +53,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
             );
           },
           child: Image.asset(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/profileScreen.dart';
 
 import '../utils/constants.dart';
 
@@ -28,13 +29,13 @@ class _FilterScreenState extends State<FilterScreen> {
         title: Text(
           'Filter',
           style: GoogleFonts.poppins(),
-        ),
+        ),centerTitle: true,
         leading:   GestureDetector(
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => HomeScreen()),
-           // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+           );
           },
           child: Image.asset(
             'assets/backButton.png', // Replace with your back button image path

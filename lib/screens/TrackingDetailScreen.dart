@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/paymentSuccessScreen.dart';
 
 import '../Widgets/buildAddressSectionWidget.dart';
 import '../Widgets/buildTimeLineStepWidget.dart';
@@ -29,7 +30,7 @@ class TrackingDetailScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CheckoutScreen()),
+              MaterialPageRoute(builder: (context) => PaymentSuccessfulScreen()),
             );
           },
           child: Image.asset(

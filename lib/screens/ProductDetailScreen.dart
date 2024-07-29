@@ -60,7 +60,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         scrolledUnderElevation: 0.0,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
           },
           child: Image.asset(
             'assets/backButton.png', // Replace with your back button image path

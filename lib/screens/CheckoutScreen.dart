@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/ShippingScreen.dart';
 import 'package:redpro_mart/screens/paymentSuccessScreen.dart';
 import '../Widgets/buildPaymentMethod.dart';
 import '../Widgets/buildProductSetail(shipping).dart';
@@ -38,7 +39,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => ShippingScreen()),
             );
           },
           child: Image.asset(

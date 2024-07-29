@@ -64,7 +64,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HomeScreen()),
+                builder: (context) => CartScreen()),
           );
         },
         child: Image.asset(

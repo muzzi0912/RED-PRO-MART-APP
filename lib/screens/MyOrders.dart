@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/OrderHistory.dart';
 import 'package:redpro_mart/screens/TrackingDetailScreen.dart';
 import 'package:redpro_mart/screens/profileScreen.dart';
 import 'package:redpro_mart/screens/searchScreen.dart';
@@ -51,7 +52,12 @@ title: Text(
 ),centerTitle: true,
           surfaceTintColor: Colors.white,
           scrolledUnderElevation: 0.0,
-          leading: GestureDetector(onTap: (){},
+          leading: GestureDetector(onTap: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OrderHistoryScreen()),
+            );
+          },
             child: Image.asset(
               'assets/backButton.png', // Replace with your back button image path
               height: 30,
