@@ -156,7 +156,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               padding: const EdgeInsets.only(left: 15),
                               child: ProductCardDuplicate(
                                 imagePath: index % 2 == 0
-                                    ? 'assets/grapes12.png'
+                                    ? 'assets/download.png'
                                     : 'assets/BananaCards.png',
                                 title: index % 2 == 0 ? 'Grapes' : 'Bananas',
                                 subtitle: index % 2 == 0 ? 'Approx. 40lb' : 'Approx. 1lb',
@@ -172,7 +172,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               child: ProductCardDuplicate(
                                 imagePath: index % 2 == 0
                                     ? 'assets/BananaCards.png'
-                                    : 'assets/grapes12.png',
+                                    : 'assets/download.png',
                                 title: index % 2 == 0 ? 'Bananas' : 'Grapes',
                                 subtitle: index % 2 == 0 ? 'Approx. 1lb' : 'Approx. 40lb',
                                 rating: index % 2 == 0 ? 4.2 : 4.5,

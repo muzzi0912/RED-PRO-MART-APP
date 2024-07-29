@@ -100,15 +100,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              overlayColor: Colors.transparent,
-            ),
-          ),
-        ],
+
       ),
       backgroundColor: Colors.white,
       body: SafeArea(

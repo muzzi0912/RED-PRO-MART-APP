@@ -146,7 +146,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                           Expanded(
                             child: ProductCardDuplicate(
                               imagePath: index % 2 == 0
-                                  ? 'assets/grapes12.png'
+                                  ? 'assets/download.png'
                                   : 'assets/BananaCards.png',
                               title: index % 2 == 0 ? 'Grapes: Yellow Plantain' : 'Bananas: Yellow Plantain',
                               subtitle: index % 2 == 0 ? 'Approx. 40lb' : 'Approx. 1lb',
@@ -159,7 +159,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
                             child: ProductCardDuplicate(
                               imagePath: index % 2 == 0
                                   ? 'assets/BananaCards.png'
-                                  : 'assets/grapes12.png',
+                                  : 'assets/download.png',
                               title: index % 2 == 0 ? 'Bananas: Yellow Plantain' : 'Grapes: Yellow Plantain',
                               subtitle: index % 2 == 0 ? 'Approx. 1lb' : 'Approx. 40lb',
                               rating: index % 2 == 0 ? 4.2 : 4.5,

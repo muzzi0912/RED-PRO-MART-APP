@@ -98,7 +98,7 @@ class _RecommendationsState extends State<Recommendations> {
                           Expanded(
                             child: FeaturedDealDuplicate(
                               imagePath: index % 2 == 0
-                                  ? 'assets/grapes12.png'
+                                  ? 'assets/download.png'
                                   : 'assets/BananaCards.png',
                               title: index % 2 == 0
                                   ? 'Grapes:Yellow Plantai'
@@ -114,7 +114,7 @@ class _RecommendationsState extends State<Recommendations> {
                             child: FeaturedDealDuplicate(
                               imagePath: index % 2 == 0
                                   ? 'assets/BananaCards.png'
-                                  : 'assets/grapes12.png',
+                                  : 'assets/download.png',
                               title: index % 2 == 0
                                   ? 'Banana:Yellow Plantai '
                                   : 'Grapes:Yellow Plantai',
