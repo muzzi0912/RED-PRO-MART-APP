@@ -51,6 +51,7 @@ dependencies:
   permission_handler:
   get:
   animated_splash_screen:
+  font_awesome_flutter:
 
 
 

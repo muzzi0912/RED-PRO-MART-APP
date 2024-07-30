@@ -1,10 +1,8 @@
-import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/AuthScreens/ForgetScreen.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter/cupertino.dart'; // Add this import for Cupertino widgets
 import '../utils/constants.dart';
 import 'SignupScreen.dart'; // Import the CreateAccountScreen for navigation
 
@@ -48,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.black,
         textColor: Colors.white,
         fontSize: 16.0,
-
       );
     }
   }
@@ -101,22 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                    Platform.isIOS
-                        ? _buildCupertinoTextField(
-                      controller: _emailController,
-                      placeholder: 'Email',
-                      onChanged: (value) => _validateEmail(value),
-                      suffix: _isEmailValid
-                          ? Icon(CupertinoIcons.check_mark_circled_solid, color: Colors.green)
-                          : null,
-                      validator: (value) {
-                        if (value == null || value.isEmpty || !_isEmailValid) {
-                          return 'Please enter your email address';
-                        }
-                        return null;
-                      },
-                    )
-                        : _buildMaterialTextField(
+                    _buildMaterialTextField(
                       controller: _emailController,
                       labelText: 'Email',
                       onChanged: (value) => _validateEmail(value),
@@ -131,31 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     SizedBox(height: Constants.screenHeightFraction(context, 0.02)),
-                    Platform.isIOS
-                        ? _buildCupertinoTextField(
-                      controller: _passwordController,
-                      placeholder: 'Password',
-                      obscureText: _obscurePassword,
-                      onChanged: (value) {
-                        // Handle password change if needed
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        } else if (value.length < 8) {
-                          return 'Password do not match';
-                        }
-                        return null;
-                      },
-                      suffix: GestureDetector(
-                        onTap: _togglePasswordVisibility,
-                        child: Icon(
-                          _obscurePassword ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                          color: _obscurePassword ? Colors.grey : Constants.mainAppColor,
-                        ),
-                      ),
-                    )
-                        : _buildMaterialTextField(
+                    _buildMaterialTextField(
                       controller: _passwordController,
                       labelText: 'Password',
                       obscureText: _obscurePassword,
@@ -171,6 +129,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: _obscurePassword ? Colors.grey : Constants.mainAppColor,
                         ),
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        } else if (value.length < 8) {
+                          return 'Password do not match';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: Constants.screenHeightFraction(context, 0.01)),
                     Row(
@@ -187,8 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) => ForgetScreen()));
                             },
                             style: TextButton.styleFrom(
-                              overlayColor: Colors.transparent
-                              ,
+                              overlayColor: Colors.transparent,
                             ),
                             child: Text(
                               'Forgot Password ?',
@@ -204,14 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Center(
                       child: Column(
                         children: [
-                          Platform.isIOS
-                              ? _buildCupertinoButton(
-                            screenWidth: screenWidth,
-                            screenHeight: screenHeight,
-                            text: 'Login',
-                            onPressed: _login, // Use the login function
-                          )
-                              : _buildMaterialButton(
+                          _buildMaterialButton(
                             screenWidth: screenWidth,
                             screenHeight: screenHeight,
                             text: 'Login',
@@ -257,29 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildCupertinoTextField({
-    TextEditingController? controller,
-    String? placeholder,
-    bool obscureText = false,
-    Widget? suffix,
-    ValueChanged<String>? onChanged,
-    String? Function(String?)? validator, // Add validator
-  }) {
-    return CupertinoTextField( keyboardType: TextInputType.text,
-      enableInteractiveSelection: false,
-      controller: controller,
-      placeholder: placeholder,
-      obscureText: obscureText,
-      onChanged: onChanged,
-      padding: EdgeInsets.only(left: 16, right: 40, top: 12, bottom: 12), // Adjusted padding
-      suffix: suffix,
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
-  }
-
   Widget _buildMaterialTextField({
     TextEditingController? controller,
     String? labelText,
@@ -308,30 +243,6 @@ class _LoginScreenState extends State<LoginScreen> {
         contentPadding: EdgeInsets.only(left: 16, right: 40, top: 12, bottom: 12), // Adjusted padding
       ),
       validator: validator, // Apply validator
-    );
-  }
-
-  Widget _buildCupertinoButton({
-    required double screenWidth,
-    required double screenHeight,
-    required String text,
-    required VoidCallback onPressed,
-  }) {
-    return CupertinoButton(
-      color: Constants.buttonColor,
-      padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.30,
-        vertical: screenHeight * 0.02,
-      ),
-      borderRadius: BorderRadius.circular(10),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: Constants.poppins(
-          fontSize: 17,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 

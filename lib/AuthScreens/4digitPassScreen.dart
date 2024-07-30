@@ -38,7 +38,7 @@ class _EnterCodePassState extends State<EnterCodePass> {
               ),
               SizedBox(height: screenHeight * 0.02),
               Text(
-                'Enter 4-digits password we sent you on your phone number',
+                'Enter the 4-digit code sent to your phone',
                 style: Constants.poppins(
                   fontSize: screenHeight * 0.020,
                   fontWeight: FontWeight.normal,

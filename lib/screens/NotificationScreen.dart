@@ -62,12 +62,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             width: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.bag),
-            onPressed: () {},
-          ),
-        ],
+
       ),
       body: SingleChildScrollView(
         child: Padding(

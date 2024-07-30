@@ -63,7 +63,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                   SizedBox(height: screenHeight * 0.02),
                   Center(
                     child: Text(
-                      'Please setup a new password for your account',
+                      'Please setup a new password',
                       textAlign: TextAlign.center,
                       style: Constants.poppins(
                         fontSize: screenHeight * 0.022,
@@ -123,7 +123,7 @@ class _SetupNewPasswordState extends State<SetupNewPassword> {
                                 _isNewPasswordObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                color: _isPasswordObscured ? Colors.grey : Constants.mainAppColor
+                                color: _isNewPasswordObscured ? Colors.grey : Constants.mainAppColor,
                               ),
                             ),
                           ),

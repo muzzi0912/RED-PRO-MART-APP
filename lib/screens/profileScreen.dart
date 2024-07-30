@@ -15,7 +15,9 @@ import 'searchScreen.dart';
 import 'wishlistScreen.dart';
 import 'EditProfileScreen.dart'; // Add this import for the Edit Profile screen
 import 'NotificationScreen.dart'; // Add this import for the Notification screen
-import 'Returnandrefundpolicy.dart'; // Add this import for the Return and Refund Policy screen
+import 'Returnandrefundpolicy.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -46,6 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
   void _showProfileOptionsDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -84,8 +87,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -105,7 +114,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => EditProfileScreen(), // Link to Edit Profile Screen
+                  builder: (context) =>
+                      EditProfileScreen(), // Link to Edit Profile Screen
                 ),
               );
             },
@@ -119,7 +129,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.red[900]),
-              accountName: Text("John Doe", style: GoogleFonts.poppins(color: Colors.white)),
+              accountName: Text(
+                  "John Doe", style: GoogleFonts.poppins(color: Colors.white)),
               accountEmail: null,
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -244,8 +255,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
             ListTile(
-              leading: IconButton(onPressed: () {}, icon: Icon(Icons.logout, color: Colors.red)),
-              title: Text('Logout', style: GoogleFonts.poppins(color: Colors.red)),
+              leading: IconButton(onPressed: () {},
+                  icon: Icon(Icons.logout, color: Colors.red)),
+              title: Text(
+                  'Logout', style: GoogleFonts.poppins(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -270,12 +283,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                           backgroundImage: AssetImage('assets/ceo_image.png'),
+                          backgroundImage: AssetImage('assets/man.png',),
+
                         ),
+
                         SizedBox(width: 16),
                         Text(
                           'John Doe',
-                          style: GoogleFonts.poppins(color: Colors.white, fontSize: 18),
+                          style: GoogleFonts.poppins(color: Colors.white,
+                              fontSize: 18),
                         ),
                       ],
                     ),
@@ -321,15 +337,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Text(
                     'My Orders',
-                    style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.poppins(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _createOrderStatusButton('Active', 'assets/Active.png', 0),
-                      _createOrderStatusButton('Completed', 'assets/Cmp.png', 1),
-                      _createOrderStatusButton('Cancel', 'assets/Cancel.png', 2),
+                      _createOrderStatusButton(
+                          'Active', FontAwesomeIcons.clipboardList, 0),
+                      _createOrderStatusButton(
+                          'Completed', FontAwesomeIcons.check, 1),
+                      _createOrderStatusButton(
+                          'Cancel', FontAwesomeIcons.times, 2),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -338,7 +358,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _createManualRoute('My Returns', 'assets/MyReturns.png', () {
+                        _createManualRoute(
+                            'My Returns', 'assets/MyReturns.png', () {
                           // Navigate to My Returns screen
                         }),
                         Container(
@@ -346,7 +367,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: screenWidth * 0.09,
                           color: Colors.grey,
                         ),
-                        _createManualRoute('Cancellation', 'assets/My Cancellation.png', () {
+                        _createManualRoute(
+                            'Cancellation', 'assets/My Cancellation.png', () {
                           // Navigate to Cancellation screen
                         }),
                       ],
@@ -368,30 +390,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _createDrawerItem({required String imagePath, required String text, required VoidCallback onTap}) {
+  Widget _createDrawerItem(
+      {required String imagePath, required String text, required VoidCallback onTap}) {
     return ListTile(
-      leading: Image.asset(imagePath, width: 24, height: 24,color: Constants.mainAppColor,),
+      leading: Image.asset(
+        imagePath, width: 24, height: 24, color: Constants.mainAppColor,),
       title: Text(text, style: GoogleFonts.poppins(color: Colors.black)),
       onTap: onTap,
     );
   }
 
-  Widget _createOrderStatusButton(String label, String imagePath, int index) {
+  Widget _createOrderStatusButton(String text, IconData icon, int index) {
     return GestureDetector(
-      onTap: () => _onOrderStatusTapped(index),
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
       child: Column(
         children: [
-          Image.asset(imagePath, height: 30),
+          Icon(
+            icon,
+            size: 24.0,
+            color: _selectedIndex == index ? Constants.mainAppColor : Colors.grey,
+          ),
+          SizedBox(height: 8.0),
           Text(
-            label,
-            style: GoogleFonts.poppins(fontSize: 16, color: _orderStatusIndex == index ? Colors.red : Colors.black),
+            text,
+            style: GoogleFonts.poppins(
+              fontSize: 15.0,
+              color: Colors.black, // Change the color as per your theme
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _createManualRoute(String label, String imagePath, VoidCallback onTap) {
+  Widget _createManualRoute(String label, String imagePath,
+      VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -430,12 +467,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Constants.mainAppColor, // Button color
-                side: BorderSide(color: Constants.mainAppColor, width: 2), // Border color and width
+                backgroundColor: Constants.mainAppColor,
+                // Button color
+                side: BorderSide(color: Constants.mainAppColor, width: 2),
+                // Border color and width
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Border radius
                 ),
-                padding: EdgeInsets.symmetric(vertical: 0.0), // Reduced vertical padding for height
+                padding: EdgeInsets.symmetric(
+                    vertical: 0.0), // Reduced vertical padding for height
               ),
               onPressed: () {
                 // View Order button action
@@ -455,5 +495,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
     );
   }
+
 
 }

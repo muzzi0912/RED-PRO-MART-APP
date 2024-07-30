@@ -37,7 +37,7 @@ class _ChatSupportState extends State<ChatSupport> {
         title: Row(
           children: [
             CircleAvatar(backgroundColor: Colors.grey,
-               backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
+               backgroundImage: AssetImage('assets/man.png'), // Replace with your asset
             ),
             SizedBox(width: 10),
             Column(
@@ -66,7 +66,7 @@ class _ChatSupportState extends State<ChatSupport> {
                 Row(
                   children: [
                     CircleAvatar(backgroundColor: Colors.grey,
-                       backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
+                       backgroundImage: AssetImage('assets/man.png'), // Replace with your asset
                     ),
                     SizedBox(width: 10),
                     Column(
@@ -150,7 +150,7 @@ class _ChatSupportState extends State<ChatSupport> {
                     ),
                     SizedBox(width: 10),
                     CircleAvatar(backgroundColor: Colors.grey,
-                      backgroundImage: AssetImage('assets/ceo_image.png'), // Replace with your asset
+                      backgroundImage: AssetImage('assets/man.png'), // Replace with your asset
                     ),
                   ],
                 ),
