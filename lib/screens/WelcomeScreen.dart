@@ -183,7 +183,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 child: Center(
                   child: Image.asset(
-                    'assets/Logo.png',
+                    'assets/new_logo.png',
                     width: screenWidth * 0.3,
                   ),
                 ),

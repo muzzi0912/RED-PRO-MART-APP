@@ -94,7 +94,7 @@ title: Text(
   Widget buildOrderList() {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: 6,
+      itemCount: 15,
       itemBuilder: (context, index) {
         return buildOrderItem();
       },
@@ -161,7 +161,7 @@ title: Text(
   Widget buildOrderList1() {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: 6,
+      itemCount: 15,
       itemBuilder: (context, index) {
         return buildOrderItem1();
       },
@@ -231,7 +231,7 @@ title: Text(
   Widget buildOrderList2() {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: 6,
+      itemCount: 15,
       itemBuilder: (context, index) {
         return buildOrderItem2();
       },

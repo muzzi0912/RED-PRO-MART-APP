@@ -87,19 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 30,
           ),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(CupertinoIcons.bag,color: Colors.white,),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => CartScreen()),
-        //       );
-        //     },   style: TextButton.styleFrom(
-        //     overlayColor: Colors.transparent,
-        //   ),
-        //   ),
-        // ],
+
       ),
       body: Stack(
         children: [

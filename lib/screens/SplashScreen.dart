@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             ScaleTransition(
               scale: _animation,
               child: Image.asset(
-                'assets/Logo.png',  // Replace with your logo asset path
+                'assets/new_logo.png',  // Replace with your logo asset path
                 width: 250,
                 height: 250,
               ),
