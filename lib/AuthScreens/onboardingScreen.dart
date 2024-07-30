@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: screenHeight * 0.01),
               SafeArea(
                 child: Image.asset(
-                  'assets/new_logo.png',
-                  width: screenWidth * 0.5,
+                  'assets/logo_new.png',
+                  width: screenWidth * 0.4,
                 ),
               ),
               SizedBox(height: screenHeight * 0.03),

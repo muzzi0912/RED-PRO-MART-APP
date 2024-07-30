@@ -58,24 +58,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               ),
             ),
             SizedBox(height: 20),
-            FadeAnimatedTextKit(
-              text: ['RED PRO MART'],
-              textStyle: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                  fontSize: 26.0,
-                  fontWeight: FontWeight.bold,
-                  color: Constants.mainAppColor,
-                ),
-              ).copyWith(
-                letterSpacing: 2.0,
-                fontSize: 26.0,
-                textBaseline: TextBaseline.alphabetic,
-              ),
-              isRepeatingAnimation: true,
-              repeatForever: true,
-              textAlign: TextAlign.start,
-             // alignment: AlignmentDirectional.topStart,
-            ),
+            // FadeAnimatedTextKit(
+            //   text: ['RED PRO MART'],
+            //   textStyle: GoogleFonts.poppins(
+            //     textStyle: TextStyle(
+            //       fontSize: 26.0,
+            //       fontWeight: FontWeight.bold,
+            //       color: Constants.mainAppColor,
+            //     ),
+            //   ).copyWith(
+            //     letterSpacing: 2.0,
+            //     fontSize: 26.0,
+            //     textBaseline: TextBaseline.alphabetic,
+            //   ),
+            //   isRepeatingAnimation: true,
+            //   repeatForever: true,
+            //   textAlign: TextAlign.start,
+            //  // alignment: AlignmentDirectional.topStart,
+            // ),
           ],
         ),
       ),
