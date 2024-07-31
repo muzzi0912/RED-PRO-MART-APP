@@ -281,6 +281,7 @@ class CreateAccountScreen extends StatelessWidget {
                               ),
                             ),
                             child: IntlPhoneField(
+                              //pickerDialogStyle: ,
                               cursorColor: Constants.mainAppColor,
                               decoration: InputDecoration(
                                 labelStyle: TextStyle(color: Colors.black),

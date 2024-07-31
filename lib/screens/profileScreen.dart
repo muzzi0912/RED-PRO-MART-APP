@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:redpro_mart/screens/ShippingPersonDetail.dart';
 import '../Widgets/bottomNavBar.dart';
 import '../utils/constants.dart';
 import 'About.dart';
@@ -49,35 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _showProfileOptionsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text('Modify Profile'),
-          children: <Widget>[
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => EditProfileScreen(),
-                  ),
-                );
-              },
-              child: Text('Edit Profile'),
-            ),
-            // Add more options if needed
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+
 
   void _onOrderStatusTapped(int index) {
     setState(() {
@@ -107,20 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      EditProfileScreen(), // Link to Edit Profile Screen
-                ),
-              );
-            },
-          ),
-        ],
+
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -254,6 +214,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
             ),
+            _createDrawerItem(
+              imagePath: 'assets/ShippingPolicy.png',
+              text: 'Shipping Information',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShippingDetailPerson(),
+                  ),
+                );
+              },
+            ),
             ListTile(
               leading: IconButton(onPressed: () {},
                   icon: Icon(Icons.logout, color: Colors.red)),
@@ -292,6 +264,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           'John Doe',
                           style: GoogleFonts.poppins(color: Colors.white,
                               fontSize: 18),
+                        ),
+                        SizedBox(width: 150,),
+                        SizedBox(
+                          width: 90,
+                          height: 40,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.white,
+                              // Button color
+                              side: BorderSide(color: Constants.mainAppColor, width: 2),
+                              // Border color and width
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10), // Border radius
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 0.0), // Reduced vertical padding for height
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                  builder: (context) => EditProfileScreen())
+                              // View Order button action
+                              );},
+                            child: Center(
+                              child: Text(
+                                'Edit profile',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontSize: 12, // Adjust font size if needed
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

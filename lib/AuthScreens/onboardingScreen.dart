@@ -62,25 +62,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 10.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
-                    ),
-                  ),
+
                 ],
               ),
-              SizedBox(height: screenHeight * 0.01),
+             // SizedBox(height: screenHeight * 0.01),
               SafeArea(
                 child: Image.asset(
                   'assets/logo_new.png',
-                  width: screenWidth * 0.4,
+                  width: screenWidth * 0.3,
                 ),
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.01),
               Text(
                 'Beautiful Ecommerce App for Your Store',
                 textAlign: TextAlign.center,
@@ -115,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
