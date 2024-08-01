@@ -4,6 +4,7 @@ import 'package:redpro_mart/screens/searchScreen.dart';
 import 'package:redpro_mart/screens/wishlistScreen.dart';
 
 import '../Widgets/bottomNavBar.dart';
+import '../utils/constants.dart';
 import 'CartScreen.dart';
 import 'HomeScreen.dart';
 
@@ -81,7 +82,7 @@ class _ShippingDetailPersonState extends State<ShippingDetailPerson> {
               TextFormField(
                 enableInteractiveSelection: false,
                 keyboardType: TextInputType.text,
-                cursorColor: Colors.blue,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color:Colors.grey),
                   labelText: 'City Dropdown',
@@ -106,7 +107,7 @@ class _ShippingDetailPersonState extends State<ShippingDetailPerson> {
               TextFormField(
                 enableInteractiveSelection: false,
                 keyboardType: TextInputType.text,
-                cursorColor: Colors.blue,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: Colors.grey),
                   labelText: 'Shipping Address',
@@ -131,7 +132,7 @@ class _ShippingDetailPersonState extends State<ShippingDetailPerson> {
               TextFormField(
                 enableInteractiveSelection: false,
                 keyboardType: TextInputType.text,
-                cursorColor: Colors.blue,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: Colors.grey),
                   labelText: 'Shipping State',
@@ -156,7 +157,7 @@ class _ShippingDetailPersonState extends State<ShippingDetailPerson> {
               TextFormField(
                 enableInteractiveSelection: false,
                 keyboardType: TextInputType.text,
-                cursorColor: Colors.blue,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: Colors.grey),
                   labelText: 'Country',
@@ -181,7 +182,7 @@ class _ShippingDetailPersonState extends State<ShippingDetailPerson> {
               TextFormField(
                 enableInteractiveSelection: false,
                 keyboardType: TextInputType.number,
-                cursorColor: Colors.blue,
+                cursorColor: Constants.mainAppColor,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: Colors.grey),
                   labelText: 'Postal Code',
