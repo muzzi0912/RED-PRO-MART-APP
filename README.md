@@ -7,4 +7,4 @@
 
 ### Upcoming Work:
 - Continue development on development or staging branch...
-- MARCOS.
+- MARCOS APP.
