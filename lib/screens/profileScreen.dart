@@ -265,7 +265,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: GoogleFonts.poppins(color: Colors.white,
                               fontSize: 18),
                         ),
-                        SizedBox(width: 150,),
+                        SizedBox(width: 70,),
                         SizedBox(
                           width: 90,
                           height: 40,
@@ -274,7 +274,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               foregroundColor: Colors.white,
                               backgroundColor: Colors.white,
                               // Button color
-                              side: BorderSide(color: Constants.mainAppColor, width: 2),
+                              side: BorderSide(color: Colors.white, width: 0),
                               // Border color and width
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10), // Border radius
