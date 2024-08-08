@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // Import FlutterToast
 import 'dart:ui'; // For BackdropFilter
 
 import 'ShippingScreen.dart';
@@ -29,17 +28,26 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
     });
   }
 
-  void _showToast() {
-    Fluttertoast.showToast(
-      msg: "The receipt has been saved to your gallery.",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.black,
-      textColor: Colors.white,
-      fontSize: 16.0,
+  void _showToast(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "The receipt has been saved to your gallery.",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+            fontFamily: 'Poppins', // Replace with your preferred font
+          ),
+        ),
+        backgroundColor: Colors.black.withOpacity(0.8), // Semi-transparent black background
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)), // Rounded top corners
+        ),
+        duration: Duration(seconds: 2), // Duration equivalent to Toast.LENGTH_SHORT
+      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +230,7 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  _showToast(); // Show toast message
+                                  _showToast(context); // Show toast message
                                 },     style: TextButton.styleFrom(
                                 overlayColor: Colors.transparent,
                               ),

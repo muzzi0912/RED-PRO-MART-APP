@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redpro_mart/AuthScreens/ForgetScreen.dart';
 import 'package:shimmer/shimmer.dart';
@@ -38,15 +37,26 @@ class _LoginScreenState extends State<LoginScreen> {
       // For example: Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } else {
       // Show an error message if validation fails
-      Fluttertoast.showToast(
-        msg: 'Please enter your email address',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0,
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Please enter your email address',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+              fontFamily: 'Poppins', // Replace with your preferred font
+            ),
+          ),
+          backgroundColor: Colors.black, // Customize background color
+          behavior: SnackBarBehavior.floating, // Makes the Snackbar float above the content
+          margin: EdgeInsets.all(10.0), // Margin around the Snackbar
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          ),
+          duration: Duration(seconds: 2), // Duration for which the Snackbar will be visible
+        ),
       );
+
     }
   }
 

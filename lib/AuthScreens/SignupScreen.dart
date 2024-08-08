@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:get/get.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Controllers/SignupController.dart';
 import '../utils/constants.dart';
@@ -16,28 +15,40 @@ class CreateAccountScreen extends StatelessWidget {
   final AuthController _authController = Get.put<AuthController>(
       AuthController());
 
-  void _showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black.withOpacity(0.8),
-      textColor: Colors.white,
-      fontSize: 16.0,
+  void _showToast(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+            fontFamily: 'Poppins', // Replace with your preferred font
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.black.withOpacity(0.8), // Semi-transparent black background
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)), // Rounded top corners
+        ),
+        duration: Duration(seconds: 4), // Equivalent to Toast.LENGTH_LONG
+      ),
     );
   }
 
-  void _signup() {
+
+  void _signup(BuildContext context) {
     if (_formKey.currentState!.validate() &&
         _authController.isUsernameValid.value &&
         _authController.isEmailValid.value &&
         _authController.isPhoneValid.value) {
       // Handle signup logic here
-      _showToast('Signup successful!');
+      _showToast(context, 'Signup successful!');
     } else {
-      _showToast('Please fill in all fields correctly.');
+      _showToast(context, 'Please fill in all fields correctly.');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +318,7 @@ class CreateAccountScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                             child: ElevatedButton(
-                              onPressed: _signup,
+                              onPressed: (){_signup(context);},
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Constants.mainAppColor,
                                 fixedSize: Size(screenWidth * 0.8, 50),
@@ -634,7 +645,9 @@ class CreateAccountScreen extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.centerLeft, // Align button to the left
                                   child: ElevatedButton(
-                                    onPressed: _signup,
+                                    onPressed: (){
+                                      _signup(context);
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Constants.mainAppColor,
                                       fixedSize: Size(screenWidth * 0.1, 40), // Reduced width of the button

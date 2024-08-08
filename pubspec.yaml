@@ -47,7 +47,6 @@ dependencies:
   flutter_screenutil:
   lottie:
   image_picker:
-  fluttertoast:
   permission_handler:
   get:
   animated_splash_screen:
